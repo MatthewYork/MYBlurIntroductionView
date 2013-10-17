@@ -26,18 +26,27 @@
         self.MasterScrollView.delegate = self;
         Panels = panels;
         
+        //Initialize Constants
+        [self initializeConstants];
+        
         //Add the blur view to the background
         [self addBlurViewwithFrame:frame];
+        
+        //Construct panels
         [self addPanelsToScrollView];
     }
     return self;
+}
+
+-(void)initializeConstants{
+    kBlurTintColor = [UIColor colorWithRed:90.0f/255.0f green:175.0f/255.0f blue:113.0f/255.0f alpha:1];
 }
 
 //Adds the blur view just below the master scroll view for a blurred background look
 -(void)addBlurViewwithFrame:(CGRect)frame{
     self.BlurView = [AMBlurView new];
     self.BlurView.alpha = 1;
-    self.BlurView.blurTintColor = [UIColor greenColor];
+    self.BlurView.blurTintColor = kBlurTintColor;
     [self.BlurView setFrame:CGRectMake(0.0f,0.0f,frame.size.width,frame.size.height)];
     [self insertSubview:self.BlurView belowSubview:self.MasterScrollView];
 }
@@ -121,8 +130,15 @@
             }
         }
         else {
-            //Update Page Control
+            //Assign the last page to be the previous current page
             LastPanelIndex = self.PageControl.currentPage;
+            
+            //Trigger the panel did appear method in the
+            if ([Panels[LastPanelIndex] respondsToSelector:@selector(panelDidDisappear)]) {
+                [Panels[LastPanelIndex] panelDidDisappear];
+            }
+            
+            //Update Page Control
             self.PageControl.currentPage = self.CurrentPanelIndex;
             
             //Format and show new content
@@ -133,6 +149,11 @@
             if (LastPanelIndex != self.CurrentPanelIndex) { //Keeps from making the callback when just bouncing and not actually changing pages
                 if ([(id)delegate respondsToSelector:@selector(introductionDidChangeToPanel:withIndex:)]) {
                     [delegate introductionDidChangeToPanel:Panels[self.CurrentPanelIndex] withIndex:self.CurrentPanelIndex];
+                }
+                
+                //Trigger the panel did appear method in the
+                if ([Panels[self.CurrentPanelIndex] respondsToSelector:@selector(panelDidAppear)]) {
+                    [Panels[self.CurrentPanelIndex] panelDidAppear];
                 }
                 
                 //Animate content to pop in nicely! :-)
@@ -176,12 +197,7 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (LanguageDirection == MYLanguageDirectionLeftToRight) {
         if (self.CurrentPanelIndex == (Panels.count - 1)) {
-            NSLog(@"TotalWidth: %f", (self.MasterScrollView.frame.size.width*(float)Panels.count));
-            NSLog(@"Content offset: %f", self.MasterScrollView.contentOffset.x);
-            
-            float alpha =((self.MasterScrollView.frame.size.width*(float)Panels.count)-self.MasterScrollView.contentOffset.x)/self.MasterScrollView.frame.size.width;
-            NSLog(@"alpha: %f", alpha);
-            self.alpha = alpha;
+            self.alpha = ((self.MasterScrollView.frame.size.width*(float)Panels.count)-self.MasterScrollView.contentOffset.x)/self.MasterScrollView.frame.size.width;;
         }
     }
     else if (LanguageDirection == MYLanguageDirectionRightToLeft){
@@ -194,26 +210,47 @@
 #pragma mark - Helper Methods
 //Show the information at the given panel with animations
 -(void)animatePanelAtIndex:(NSInteger)index{
+    //If it is a custom panel, skip stock animation
+    
+    //Hide all labels
     for (MYIntroductionPanel *panelView in Panels) {
         panelView.PanelTitleLabel.alpha = 0;
         panelView.PanelDescriptionLabel.alpha = 0;
+        if (panelView.PanelHeaderView) {
+            panelView.PanelHeaderView.alpha = 0;
+        }
     }
     
+    if ([Panels[index] isCustomPanel]) {
+        return;
+    }
+    
+    //Animate
     if (Panels.count > index) {
         //Get initial frames
+        CGRect initialHeaderFrame = CGRectZero;
+        if ([Panels[index] PanelHeaderView]) {
+            initialHeaderFrame = [Panels[index] PanelHeaderView].frame;
+        }
         CGRect initialTitleFrame = [Panels[index] PanelTitleLabel].frame;
         CGRect initialDescriptionFrame = [Panels[index] PanelDescriptionLabel].frame;
-
+        
         //Offset frames
         [[Panels[index] PanelTitleLabel] setFrame:CGRectMake(initialTitleFrame.origin.x + 10, initialTitleFrame.origin.y, initialTitleFrame.size.width, initialTitleFrame.size.height)];
         [[Panels[index] PanelDescriptionLabel] setFrame:CGRectMake(initialDescriptionFrame.origin.x + 10, initialDescriptionFrame.origin.y, initialDescriptionFrame.size.width, initialDescriptionFrame.size.height)];
+        [[Panels[index] PanelHeaderView] setFrame:CGRectMake(initialDescriptionFrame.origin.x, initialDescriptionFrame.origin.y - 10, initialDescriptionFrame.size.width, initialDescriptionFrame.size.height)];
         
-        //Animate Title
+        //Animate title and header
         [UIView animateWithDuration:0.3 animations:^{
             [[Panels[index] PanelTitleLabel] setAlpha:1];
             [[Panels[index] PanelTitleLabel] setFrame:initialTitleFrame];
+            
+            if ([Panels[index] PanelHeaderView]) {
+                [[Panels[index] PanelHeaderView] setAlpha:1];
+                [[Panels[index] PanelHeaderView] setFrame:initialHeaderFrame];
+            }
         } completion:^(BOOL finished) {
-            //Animate Description
+            //Animate description
             [UIView animateWithDuration:0.3 animations:^{
                 [[Panels[index] PanelDescriptionLabel] setAlpha:1];
                 [[Panels[index] PanelDescriptionLabel] setFrame:initialDescriptionFrame];

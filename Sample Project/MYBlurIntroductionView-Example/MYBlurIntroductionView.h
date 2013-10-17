@@ -12,6 +12,8 @@
 #import "AMBlurView.h"
 #import "MYIntroductionPanel.h"
 
+static UIColor *kBlurTintColor = nil;
+
 //Enum to define types of introduction finishes
 typedef enum {
     MYFinishTypeSwipeOut = 0,

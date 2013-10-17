@@ -33,6 +33,19 @@
     return self;
 }
 
+-(id)initWithFrame:(CGRect)frame title:(NSString *)title description:(NSString *)description header:(UIView *)headerView{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+        [self initializeConstants];
+        self.PanelHeaderView = headerView;
+        self.PanelTitle = title;
+        self.PanelDescription = description;
+        [self buildPanelWithFrame:frame];
+    }
+    return self;
+}
+
 -(id)initWithFrame:(CGRect)frame title:(NSString *)title description:(NSString *)description image:(UIImage *)image{
     self = [super initWithFrame:frame];
     if (self) {
@@ -46,22 +59,27 @@
     return self;
 }
 
--(id)initWithFrame:(CGRect)frame view:(UIView *)view{
-    self = [super init];
+-(id)initWithFrame:(CGRect)frame title:(NSString *)title description:(NSString *)description image:(UIImage *)image header:(UIView *)headerView{
+    self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self = (MYIntroductionPanel *)view;
-        self.frame = frame;
+        [self initializeConstants];
+        self.PanelHeaderView = headerView;
+        self.PanelTitle = title;
+        self.PanelDescription = description;
+        self.PanelImage = image;
+        [self buildPanelWithFrame:frame];
     }
     return self;
 }
 
--(id)initWithFrame:(CGRect)frame NibNamed:(NSString *)nibName{
+-(id)initWithFrame:(CGRect)frame nibNamed:(NSString *)nibName{
     self = [super init];
     if (self) {
         // Initialization code
         self = [[NSBundle mainBundle] loadNibNamed:nibName owner:nil options:nil][0];
         self.frame = frame;
+        self.isCustomPanel = YES;
     }
     return self;
 }
@@ -71,6 +89,7 @@
     kTitleTextColor = [UIColor whiteColor];
     kDescriptionFont = [UIFont systemFontOfSize:14];
     kDescriptionTextColor = [UIColor whiteColor];
+    kSeparatorLineColor = [UIColor colorWithWhite:0 alpha:0.1];
     
     self.backgroundColor = [UIColor clearColor];
 }
@@ -87,6 +106,16 @@
 -(void)buildPanelWithFrame:(CGRect)frame{
     CGFloat panelTitleHeight = 0;
     CGFloat panelDescriptionHeight = 0;
+    
+    CGFloat runningYOffset = kTopPadding;
+    
+    //Process panel header view, if it exists
+    if (self.PanelHeaderView) {
+        self.PanelHeaderView.frame = CGRectMake((frame.size.width - self.PanelHeaderView.frame.size.width)/2, runningYOffset, self.PanelHeaderView.frame.size.width, self.PanelHeaderView.frame.size.height);
+        [self addSubview:self.PanelHeaderView];
+        
+        runningYOffset += self.PanelHeaderView.frame.size.height + kHeaderTitlePadding;
+    }
     
     //Calculate title and description heights
     if ([MYIntroductionPanel runningiOS7]) {
@@ -107,15 +136,21 @@
     }
     
     //Create Desciption Y offset based on title size
-    CGFloat descriptionYOffset = kTopPadding + panelTitleHeight + kTitleDescriptionPadding;
+    CGFloat descriptionYOffset = runningYOffset + panelTitleHeight + kTitleDescriptionPadding;
     
     //Create title label
-    self.PanelTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kLeftRightMargins, kTopPadding, frame.size.width - 2*kLeftRightMargins, panelTitleHeight)];
+    self.PanelTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kLeftRightMargins, runningYOffset, frame.size.width - 2*kLeftRightMargins, panelTitleHeight)];
     self.PanelTitleLabel.numberOfLines = 0;
     self.PanelTitleLabel.text = self.PanelTitle;
     self.PanelTitleLabel.font = kTitleFont;
     self.PanelTitleLabel.textColor = kTitleTextColor;
     self.PanelTitleLabel.alpha = 0;
+    [self addSubview:self.PanelTitleLabel];
+    
+    //Add small line in between title and description
+    self.PanelSeparatorLine = [[UIView alloc] initWithFrame:CGRectMake(kLeftRightMargins, descriptionYOffset - 0.5*kTitleDescriptionPadding, frame.size.width - 2*kLeftRightMargins, 1)];
+    self.PanelSeparatorLine.backgroundColor = kSeparatorLineColor;
+     [self addSubview:self.PanelSeparatorLine];
     
     //Create title label
     self.PanelDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(kLeftRightMargins, descriptionYOffset, frame.size.width - 2*kLeftRightMargins, panelDescriptionHeight)];
@@ -124,9 +159,8 @@
     self.PanelDescriptionLabel.font = kDescriptionFont;
     self.PanelDescriptionLabel.textColor = kDescriptionTextColor;
     self.PanelDescriptionLabel.alpha = 0;
-    
-    [self addSubview:self.PanelTitleLabel];
     [self addSubview:self.PanelDescriptionLabel];
+    
 }
 
 +(BOOL)runningiOS7{
@@ -137,5 +171,16 @@
     
     return NO;
 }
+
+#pragma mark - Interaction Methods
+
+-(void)panelDidAppear{
+    //Implemented by subclass
+}
+
+-(void)panelDidDisappear{
+    //Implemented by subclass
+}
+
 
 @end

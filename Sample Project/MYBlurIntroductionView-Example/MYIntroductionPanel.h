@@ -11,25 +11,36 @@
 const static CGFloat kTopPadding = 30;
 const static CGFloat kLeftRightMargins = 10;
 const static CGFloat kBottomPadding = 10;
-const static CGFloat kTitleDescriptionPadding;
+const static CGFloat kHeaderTitlePadding = 10;
+const static CGFloat kTitleDescriptionPadding = 10;
 static UIFont *kTitleFont = nil;
 static UIColor *kTitleTextColor = nil;
 static UIFont *kDescriptionFont = nil;
 static UIColor *kDescriptionTextColor = nil;
+static UIColor *kSeparatorLineColor = nil;
 
 @interface MYIntroductionPanel : UIView
 
+@property (nonatomic, retain) UIView *PanelHeaderView;
 @property (nonatomic, retain) NSString *PanelTitle;
 @property (nonatomic, retain) NSString *PanelDescription;
 @property (nonatomic, retain) UILabel *PanelTitleLabel;
 @property (nonatomic, retain) UILabel *PanelDescriptionLabel;
+@property (nonatomic, retain) UIView *PanelSeparatorLine;
 @property (nonatomic, retain) UIImage *PanelImage;
+@property (nonatomic, assign) BOOL isCustomPanel;
 
 //Init Methods
 -(id)initWithFrame:(CGRect)frame title:(NSString *)title description:(NSString *)description;
+-(id)initWithFrame:(CGRect)frame title:(NSString *)title description:(NSString *)description header:(UIView *)headerView;
 -(id)initWithFrame:(CGRect)frame title:(NSString *)title description:(NSString *)description image:(UIImage *)image;
+-(id)initWithFrame:(CGRect)frame title:(NSString *)title description:(NSString *)description image:(UIImage *)image header:(UIView *)headerView;
 -(id)initWithFrame:(CGRect)frame nibNamed:(NSString *)nibName;
 
 //Support Methods
 +(BOOL)runningiOS7;
+
+//Interaction Methods
+-(void)panelDidAppear;
+-(void)panelDidDisappear;
 @end

@@ -40,7 +40,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.4823529412" green="0.48627450979999998" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.35274266599999998" green="0.68555939499999996" blue="0.44502485190000002" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <connections>
                 <outlet property="LeftSkipButton" destination="At6-yg-AIE" id="7n1-E3-7Ls"/>
