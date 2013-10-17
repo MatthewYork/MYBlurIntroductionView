@@ -43,11 +43,18 @@
 
 //Adds the blur view just below the master scroll view for a blurred background look
 -(void)addBlurViewwithFrame:(CGRect)frame{
-    self.BlurView = [AMBlurView new];
-    self.BlurView.alpha = 1;
-    self.BlurView.blurTintColor = kBlurTintColor;
-    [self.BlurView setFrame:CGRectMake(0.0f,0.0f,frame.size.width,frame.size.height)];
-    [self insertSubview:self.BlurView belowSubview:self.MasterScrollView];
+    if ([MYIntroductionPanel runningiOS7]) {
+        self.BlurView = [AMBlurView new];
+        self.BlurView.alpha = 1;
+        self.BlurView.blurTintColor = kBlurTintColor;
+        [self.BlurView setFrame:CGRectMake(0.0f,0.0f,frame.size.width,frame.size.height)];
+        [self insertSubview:self.BlurView belowSubview:self.MasterScrollView];
+    }
+    else {
+        self.BackgroundColorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,0.0f,frame.size.width,frame.size.height)];
+        self.BackgroundColorView.backgroundColor = kBlurTintColor;
+        [self insertSubview:self.BackgroundColorView belowSubview:self.MasterScrollView];
+    }
 }
 
 -(void)addPanelsToScrollView{
@@ -57,7 +64,7 @@
             self.PageControl.numberOfPages = Panels.count;
             
             //Set items specific to text direction
-            if (LanguageDirection == MYLanguageDirectionLeftToRight) {
+            if (self.LanguageDirection == MYLanguageDirectionLeftToRight) {
                 self.LeftSkipButton.hidden = YES;
                 [self buildScrollViewLeftToRight];
             }
@@ -87,20 +94,33 @@
     
     [self appendCloseViewAtXIndex:&panelXOffset];
     
-    [self.MasterScrollView setContentSize:CGSizeMake(panelXOffset, self.frame.size.width)];
+    [self.MasterScrollView setContentSize:CGSizeMake(panelXOffset, self.frame.size.height)];
     
     //Show the information at the first panel with animations
     [self animatePanelAtIndex:0];
 }
 
 -(void)buildScrollViewRightToLeft{
-    CGFloat panelXOffset = 0;
+    CGFloat panelXOffset = self.frame.size.width*Panels.count;
+    [self.MasterScrollView setContentSize:CGSizeMake(panelXOffset + self.frame.size.width, self.frame.size.height)];
+    
     for (MYIntroductionPanel *panelView in Panels) {
         //Update panelXOffset to next view origin location
-        panelXOffset -= panelView.frame.size.width;
-        
+        panelView.frame = CGRectMake(panelXOffset, 0, self.frame.size.width, self.frame.size.height);
         [self.MasterScrollView addSubview:panelView];
+        
+        panelXOffset -= panelView.frame.size.width;
     }
+    
+    [self appendCloseViewAtXIndex:&panelXOffset];
+    
+    
+    [self.MasterScrollView setContentOffset:CGPointMake(self.frame.size.width*Panels.count, 0)];
+    
+    self.PageControl.currentPage = Panels.count;
+    
+    //Show the information at the first panel with animations
+    [self animatePanelAtIndex:0];
 }
 
 /*
@@ -119,13 +139,13 @@
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    if (LanguageDirection == MYLanguageDirectionLeftToRight) {
+    if (self.LanguageDirection == MYLanguageDirectionLeftToRight) {
         self.CurrentPanelIndex = scrollView.contentOffset.x/self.MasterScrollView.frame.size.width;
         
-        //remove self if you are at the end of the introduction
+        //Trigger the finish if you are at the end
         if (self.CurrentPanelIndex == (Panels.count)) {
-            if ([(id)delegate respondsToSelector:@selector(introductionDidFinishWithType:)]) {
-                [delegate introductionDidFinishWithType:MYFinishTypeSwipeOut];
+            if ([(id)delegate respondsToSelector:@selector(introduction:didFinishWithType:)]) {
+                [delegate introduction:self didFinishWithType:MYFinishTypeSwipeOut];
             }
         }
         else {
@@ -140,14 +160,10 @@
             //Update Page Control
             self.PageControl.currentPage = self.CurrentPanelIndex;
             
-            //Format and show new content
-            //[self setContentScrollViewHeightForPanelIndex:self.CurrentPanelIndex animated:YES];
-            //[self makePanelVisibleAtIndex:(NSInteger)self.CurrentPanelIndex];
-            
             //Call Back, if applicable
             if (LastPanelIndex != self.CurrentPanelIndex) { //Keeps from making the callback when just bouncing and not actually changing pages
-                if ([(id)delegate respondsToSelector:@selector(introductionDidChangeToPanel:withIndex:)]) {
-                    [delegate introductionDidChangeToPanel:Panels[self.CurrentPanelIndex] withIndex:self.CurrentPanelIndex];
+                if ([(id)delegate respondsToSelector:@selector(introduction:didChangeToPanel:withIndex:)]) {
+                    [delegate introduction:self didChangeToPanel:Panels[self.CurrentPanelIndex] withIndex:self.CurrentPanelIndex];
                 }
                 
                 //Trigger the panel did appear method in the
@@ -160,13 +176,13 @@
             }
         }
     }
-    else if(LanguageDirection == MYLanguageDirectionRightToLeft){
+    else if(self.LanguageDirection == MYLanguageDirectionRightToLeft){
         self.CurrentPanelIndex = (scrollView.contentOffset.x-self.frame.size.width)/self.MasterScrollView.frame.size.width;
         
         //remove self if you are at the end of the introduction
         if (self.CurrentPanelIndex == -1) {
-            if ([(id)delegate respondsToSelector:@selector(introductionDidFinishWithType:)]) {
-                [delegate introductionDidFinishWithType:MYFinishTypeSwipeOut];
+            if ([(id)delegate respondsToSelector:@selector(introduction:didFinishWithType:)]) {
+                [delegate introduction:self didFinishWithType:MYFinishTypeSwipeOut];
             }
         }
         else {
@@ -174,19 +190,18 @@
             LastPanelIndex = self.PageControl.currentPage;
             self.PageControl.currentPage = self.CurrentPanelIndex;
             
-            //Format and show new content
-            //[self setContentScrollViewHeightForPanelIndex:self.CurrentPanelIndex animated:YES];
-            //[self makePanelVisibleAtIndex:(NSInteger)self.CurrentPanelIndex];
-            
-            
             //Call Back, if applicable
             if (LastPanelIndex != self.CurrentPanelIndex) { //Keeps from making the callback when just bouncing and not actually changing pages
-                if ([(id)delegate respondsToSelector:@selector(introductionDidChangeToPanel:withIndex:)]) {
-                    [delegate introductionDidChangeToPanel:Panels[self.CurrentPanelIndex] withIndex:self.CurrentPanelIndex];
+                if ([(id)delegate respondsToSelector:@selector(introduction:didChangeToPanel:withIndex:)]) {
+                    [delegate introduction:self didChangeToPanel:Panels[Panels.count-1 - self.CurrentPanelIndex] withIndex:Panels.count-1 - self.CurrentPanelIndex];
+                }
+                //Trigger the panel did appear method in the
+                if ([Panels[Panels.count-1 - self.CurrentPanelIndex] respondsToSelector:@selector(panelDidAppear)]) {
+                    [Panels[Panels.count-1 - self.CurrentPanelIndex] panelDidAppear];
                 }
                 
                 //Animate content to pop in nicely! :-)
-                [self animatePanelAtIndex:self.CurrentPanelIndex];
+                [self animatePanelAtIndex:Panels.count-1 - self.CurrentPanelIndex];
             }
         }
     }
@@ -194,12 +209,12 @@
 
 //This will handle our changing opacity at the end of the introduction
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if (LanguageDirection == MYLanguageDirectionLeftToRight) {
+    if (self.LanguageDirection == MYLanguageDirectionLeftToRight) {
         if (self.CurrentPanelIndex == (Panels.count - 1)) {
-            self.alpha = ((self.MasterScrollView.frame.size.width*(float)Panels.count)-self.MasterScrollView.contentOffset.x)/self.MasterScrollView.frame.size.width;;
+            self.alpha = ((self.MasterScrollView.frame.size.width*(float)Panels.count)-self.MasterScrollView.contentOffset.x)/self.MasterScrollView.frame.size.width;
         }
     }
-    else if (LanguageDirection == MYLanguageDirectionRightToLeft){
+    else if (self.LanguageDirection == MYLanguageDirectionRightToLeft){
         if (self.CurrentPanelIndex == 0) {
             self.alpha = self.MasterScrollView.contentOffset.x/self.MasterScrollView.frame.size.width;
         }
@@ -280,8 +295,8 @@
 }
 
 -(void)skipIntroduction{
-    if ([(id)delegate respondsToSelector:@selector(introductionDidFinishWithType:)]) {
-        [delegate introductionDidFinishWithType:MYFinishTypeSkipButton];
+    if ([(id)delegate respondsToSelector:@selector(introduction:didFinishWithType:)]) {
+        [delegate introduction:self didFinishWithType:MYFinishTypeSkipButton];
     }
     
     [self hideWithFadeOutDuration:0.3];
@@ -301,11 +316,11 @@
 -(void)setEnabled:(BOOL)enabled{
     [UIView animateWithDuration:0.3 animations:^{
         if (enabled) {
-            if (LanguageDirection == MYLanguageDirectionLeftToRight) {
+            if (self.LanguageDirection == MYLanguageDirectionLeftToRight) {
                 self.LeftSkipButton.alpha = !enabled;
                 self.RightSkipButton.alpha = enabled;
             }
-            else if (LanguageDirection == MYLanguageDirectionRightToLeft){
+            else if (self.LanguageDirection == MYLanguageDirectionRightToLeft){
                 self.LeftSkipButton.alpha = enabled;
                 self.RightSkipButton.alpha = !enabled;
             }
@@ -319,4 +334,16 @@
         }
     }];
 }
+
+#pragma mark - Customization Methods
+
+-(void)setBackgroundColor:(UIColor *)backgroundColor{
+    if (self.BackgroundColorView) {
+        self.BackgroundColorView.backgroundColor = backgroundColor;
+    }
+    else if (self.BlurView){
+        self.BlurView.blurTintColor = backgroundColor;
+    }
+}
+
 @end

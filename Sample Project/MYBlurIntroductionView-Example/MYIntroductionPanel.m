@@ -123,22 +123,19 @@
     if ([MYIntroductionPanel runningiOS7]) {
         //Calculate Title Height
         NSDictionary *titleAttributes = [NSDictionary dictionaryWithObject:kTitleFont forKey: NSFontAttributeName];
-        panelTitleHeight = [self.PanelTitle boundingRectWithSize:CGSizeMake(frame.size.width - 2*kLeftRightMargins, 200) options:NSStringDrawingUsesLineFragmentOrigin attributes:titleAttributes context:nil].size.height;
+        panelTitleHeight = [self.PanelTitle boundingRectWithSize:CGSizeMake(frame.size.width - 2*kLeftRightMargins, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:titleAttributes context:nil].size.height;
         panelTitleHeight = ceilf(panelTitleHeight);
         
         //Calculate Description Height
         NSDictionary *descriptionAttributes = [NSDictionary dictionaryWithObject:kDescriptionFont forKey: NSFontAttributeName];
-        panelDescriptionHeight = [self.PanelDescription boundingRectWithSize:CGSizeMake(frame.size.width - 2*kLeftRightMargins, 200) options:NSStringDrawingUsesLineFragmentOrigin attributes:descriptionAttributes context:nil].size.height;
+        panelDescriptionHeight = [self.PanelDescription boundingRectWithSize:CGSizeMake(frame.size.width - 2*kLeftRightMargins, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:descriptionAttributes context:nil].size.height;
         panelDescriptionHeight = ceilf(panelDescriptionHeight);
     }
     else {
-        panelTitleHeight = [self.PanelTitle sizeWithFont:kTitleFont constrainedToSize:CGSizeMake(frame.size.width - 2*kLeftRightMargins, 200) lineBreakMode:NSLineBreakByWordWrapping].height;
+        panelTitleHeight = [self.PanelTitle sizeWithFont:kTitleFont constrainedToSize:CGSizeMake(frame.size.width - 2*kLeftRightMargins, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping].height;
         
-        panelDescriptionHeight = [self.PanelDescription sizeWithFont:kTitleFont constrainedToSize:CGSizeMake(frame.size.width - 2*kLeftRightMargins, 200) lineBreakMode:NSLineBreakByWordWrapping].height;
+        panelDescriptionHeight = [self.PanelDescription sizeWithFont:kDescriptionFont constrainedToSize:CGSizeMake(frame.size.width - 2*kLeftRightMargins, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping].height;
     }
-    
-    //Create Desciption Y offset based on title size
-    CGFloat descriptionYOffset = runningYOffset + panelTitleHeight + kTitleDescriptionPadding;
     
     //Create title label
     self.PanelTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kLeftRightMargins, runningYOffset, frame.size.width - 2*kLeftRightMargins, panelTitleHeight)];
@@ -147,23 +144,27 @@
     self.PanelTitleLabel.font = kTitleFont;
     self.PanelTitleLabel.textColor = kTitleTextColor;
     self.PanelTitleLabel.alpha = 0;
+    self.PanelTitleLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:self.PanelTitleLabel];
+    runningYOffset += panelTitleHeight + kTitleDescriptionPadding;
+    
     
     //Add small line in between title and description
-    self.PanelSeparatorLine = [[UIView alloc] initWithFrame:CGRectMake(kLeftRightMargins, descriptionYOffset - 0.5*kTitleDescriptionPadding, frame.size.width - 2*kLeftRightMargins, 1)];
+    self.PanelSeparatorLine = [[UIView alloc] initWithFrame:CGRectMake(kLeftRightMargins, runningYOffset - 0.5*kTitleDescriptionPadding, frame.size.width - 2*kLeftRightMargins, 1)];
     self.PanelSeparatorLine.backgroundColor = kSeparatorLineColor;
      [self addSubview:self.PanelSeparatorLine];
     
     //Create description label
-    self.PanelDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(kLeftRightMargins, descriptionYOffset, frame.size.width - 2*kLeftRightMargins, panelDescriptionHeight)];
+    self.PanelDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(kLeftRightMargins, runningYOffset, frame.size.width - 2*kLeftRightMargins, panelDescriptionHeight)];
     self.PanelDescriptionLabel.numberOfLines = 0;
     self.PanelDescriptionLabel.text = self.PanelDescription;
     self.PanelDescriptionLabel.font = kDescriptionFont;
     self.PanelDescriptionLabel.textColor = kDescriptionTextColor;
     self.PanelDescriptionLabel.alpha = 0;
+    self.PanelDescriptionLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:self.PanelDescriptionLabel];
     
-    runningYOffset = descriptionYOffset + panelDescriptionHeight + kDescriptionImagePadding;
+    runningYOffset += panelDescriptionHeight + kDescriptionImagePadding;
     
     //Add image, if there is room
     if (self.PanelImageView.image) {

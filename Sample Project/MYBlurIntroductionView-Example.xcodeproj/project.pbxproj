@@ -110,22 +110,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F01AC88E18102B4E0093352B /* Test Panels */ = {
+		F01AC88E18102B4E0093352B /* Custom Panels */ = {
 			isa = PBXGroup;
 			children = (
 				F01AC894181038FF0093352B /* TestHeader.xib */,
+				F01AC88A181021E50093352B /* TestPanel3.xib */,
+				F01AC8981810514A0093352B /* Subclassed Panel */,
 			);
-			name = "Test Panels";
+			name = "Custom Panels";
 			sourceTree = "<group>";
 		};
-		F01AC8981810514A0093352B /* Custo Panel Example */ = {
+		F01AC8981810514A0093352B /* Subclassed Panel */ = {
 			isa = PBXGroup;
 			children = (
 				F01AC88F1810311B0093352B /* MYCustomPanel.h */,
 				F01AC8901810311B0093352B /* MYCustomPanel.m */,
 				F01AC8921810314B0093352B /* MYCustomPanel.xib */,
 			);
-			name = "Custo Panel Example";
+			name = "Subclassed Panel";
 			sourceTree = "<group>";
 		};
 		F01AC89B18105A500093352B /* Images */ = {
@@ -180,9 +182,7 @@
 				F0E9CB58180F685900D89DE2 /* Main_iPad.storyboard */,
 				F0E9CB5B180F685900D89DE2 /* MYViewController.h */,
 				F0E9CB5C180F685900D89DE2 /* MYViewController.m */,
-				F01AC88E18102B4E0093352B /* Test Panels */,
-				F01AC88A181021E50093352B /* TestPanel3.xib */,
-				F01AC8981810514A0093352B /* Custo Panel Example */,
+				F01AC88E18102B4E0093352B /* Custom Panels */,
 				F0E9CB5E180F685900D89DE2 /* Images.xcassets */,
 				F0E9CB4A180F685900D89DE2 /* Supporting Files */,
 			);
@@ -281,6 +281,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Matthew York";
 				TargetAttributes = {
+					F0E9CB3F180F685900D89DE2 = {
+						DevelopmentTeam = F524X93FN5;
+					};
 					F0E9CB63180F685900D89DE2 = {
 						TestTargetID = F0E9CB3F180F685900D89DE2;
 					};
@@ -481,12 +484,17 @@
 		F0E9CB76180F685900D89DE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MYBlurIntroductionView-Example/MYBlurIntroductionView-Example-Prefix.pch";
 				INFOPLIST_FILE = "MYBlurIntroductionView-Example/MYBlurIntroductionView-Example-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -494,12 +502,17 @@
 		F0E9CB77180F685900D89DE2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MYBlurIntroductionView-Example/MYBlurIntroductionView-Example-Prefix.pch";
 				INFOPLIST_FILE = "MYBlurIntroductionView-Example/MYBlurIntroductionView-Example-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

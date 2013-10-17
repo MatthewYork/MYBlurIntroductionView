@@ -53,12 +53,26 @@
 }
 
 - (void) setBlurTintColor:(UIColor *)blurTintColor {
-    [self.toolbar setBarTintColor:blurTintColor];
+    if ([self runningiOS7]) {
+        [self.toolbar setBarTintColor:blurTintColor];
+    }
+    else {
+        [self.toolbar setBackgroundColor:blurTintColor];
+    }
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self.toolbar setFrame:[self bounds]];
+}
+
+-(BOOL)runningiOS7{
+    NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
+    if (currSysVer.floatValue >= 7.0) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 @end

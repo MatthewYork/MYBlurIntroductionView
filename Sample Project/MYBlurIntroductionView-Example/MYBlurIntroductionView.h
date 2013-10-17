@@ -26,13 +26,15 @@ typedef enum {
     MYLanguageDirectionRightToLeft
 }MYLanguageDirection;
 
+@class MYBlurIntroductionView;
+
 /******************************/
 //Delegate Method Declarations
 /******************************/
 @protocol MYIntroductionDelegate
 @optional
--(void)introductionDidFinishWithType:(MYFinishType)finishType;
--(void)introductionDidChangeToPanel:(MYIntroductionPanel *)panel withIndex:(NSInteger)panelIndex;
+-(void)introduction:(MYBlurIntroductionView *)introductionView didFinishWithType:(MYFinishType)finishType;
+-(void)introduction:(MYBlurIntroductionView *)introductionView didChangeToPanel:(MYIntroductionPanel *)panel withIndex:(NSInteger)panelIndex;
 @end
 
 /******************************/
@@ -40,8 +42,6 @@ typedef enum {
 /******************************/
 @interface MYBlurIntroductionView : UIView <UIScrollViewDelegate>{
     NSArray *Panels;
-    
-    MYLanguageDirection LanguageDirection;
     
     NSInteger LastPanelIndex;
 }
@@ -54,12 +54,14 @@ typedef enum {
 @property (weak) id <MYIntroductionDelegate> delegate;
 
 @property (nonatomic, retain) AMBlurView *BlurView;
+@property (nonatomic, retain) UIView *BackgroundColorView;
 @property (weak, nonatomic) IBOutlet UIImageView *BackgroundImageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *MasterScrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *PageControl;
 @property (weak, nonatomic) IBOutlet UIButton *RightSkipButton;
 @property (weak, nonatomic) IBOutlet UIButton *LeftSkipButton;
 @property (nonatomic, assign) NSInteger CurrentPanelIndex;
+@property (nonatomic, assign) MYLanguageDirection LanguageDirection;
 
 //Construction Methods
 -(void)buildIntroductionWithPanels:(NSArray *)panels;
@@ -70,4 +72,7 @@ typedef enum {
 
 //Enables or disables use of the introductionView. Use this if you want to hold someone on a panel until they have completed some task
 -(void)setEnabled:(BOOL)enabled;
+
+//Customization Methods
+-(void)setBlurTintColor:(UIColor *)blurTintColor;
 @end
