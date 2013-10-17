@@ -22,6 +22,7 @@ It's time for one introduction/tutorial view to end them all! MYBlurIntroduction
 
 ## What to include
 
+MYBlurIntroductionView is dependent on the following files and frameworks
 * <code>MYblurIntroductionView.{h,m}</code>
 * <code>MYIntroductionPanel.{h,m}</code>
 * <code>AMBlurView.{h,m}</code>
@@ -33,7 +34,7 @@ Creating an introduction view can basically be boiled down to these steps
 
 1. Create panels
 2. Create and MYIntroductionView
-3. Add panels to MYIntroductionView
+3. Add MYIntroductionPanels to MYIntroductionView
 4. Show View
 
 ## Creating Panels
