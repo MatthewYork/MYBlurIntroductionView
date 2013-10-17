@@ -12,6 +12,8 @@
 		F01AC8931810314C0093352B /* MYCustomPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F01AC8921810314B0093352B /* MYCustomPanel.xib */; };
 		F01AC895181038FF0093352B /* TestHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = F01AC894181038FF0093352B /* TestHeader.xib */; };
 		F01AC89718103A910093352B /* HeaderImage.png in Resources */ = {isa = PBXBuildFile; fileRef = F01AC89618103A910093352B /* HeaderImage.png */; };
+		F01AC89A18105A450093352B /* CheckMarkWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = F01AC89918105A450093352B /* CheckMarkWhite.png */; };
+		F01AC89F18105F0B0093352B /* ForkImage.png in Resources */ = {isa = PBXBuildFile; fileRef = F01AC89E18105F0B0093352B /* ForkImage.png */; };
 		F0E9CB44180F685900D89DE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E9CB43180F685900D89DE2 /* Foundation.framework */; };
 		F0E9CB46180F685900D89DE2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E9CB45180F685900D89DE2 /* CoreGraphics.framework */; };
 		F0E9CB48180F685900D89DE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E9CB47180F685900D89DE2 /* UIKit.framework */; };
@@ -51,6 +53,8 @@
 		F01AC8921810314B0093352B /* MYCustomPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYCustomPanel.xib; sourceTree = "<group>"; };
 		F01AC894181038FF0093352B /* TestHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestHeader.xib; sourceTree = "<group>"; };
 		F01AC89618103A910093352B /* HeaderImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HeaderImage.png; sourceTree = "<group>"; };
+		F01AC89918105A450093352B /* CheckMarkWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckMarkWhite.png; sourceTree = "<group>"; };
+		F01AC89E18105F0B0093352B /* ForkImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ForkImage.png; sourceTree = "<group>"; };
 		F0E9CB40180F685900D89DE2 /* MYBlurIntroductionView-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MYBlurIntroductionView-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0E9CB43180F685900D89DE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F0E9CB45180F685900D89DE2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -109,10 +113,30 @@
 		F01AC88E18102B4E0093352B /* Test Panels */ = {
 			isa = PBXGroup;
 			children = (
-				F01AC89618103A910093352B /* HeaderImage.png */,
 				F01AC894181038FF0093352B /* TestHeader.xib */,
 			);
 			name = "Test Panels";
+			sourceTree = "<group>";
+		};
+		F01AC8981810514A0093352B /* Custo Panel Example */ = {
+			isa = PBXGroup;
+			children = (
+				F01AC88F1810311B0093352B /* MYCustomPanel.h */,
+				F01AC8901810311B0093352B /* MYCustomPanel.m */,
+				F01AC8921810314B0093352B /* MYCustomPanel.xib */,
+			);
+			name = "Custo Panel Example";
+			sourceTree = "<group>";
+		};
+		F01AC89B18105A500093352B /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				F01AC89E18105F0B0093352B /* ForkImage.png */,
+				F01AC89618103A910093352B /* HeaderImage.png */,
+				F0E9CB87180F6C6A00D89DE2 /* Toronto, ON.jpg */,
+				F01AC89918105A450093352B /* CheckMarkWhite.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		F0E9CB37180F685900D89DE2 = {
@@ -158,9 +182,7 @@
 				F0E9CB5C180F685900D89DE2 /* MYViewController.m */,
 				F01AC88E18102B4E0093352B /* Test Panels */,
 				F01AC88A181021E50093352B /* TestPanel3.xib */,
-				F01AC88F1810311B0093352B /* MYCustomPanel.h */,
-				F01AC8901810311B0093352B /* MYCustomPanel.m */,
-				F01AC8921810314B0093352B /* MYCustomPanel.xib */,
+				F01AC8981810514A0093352B /* Custo Panel Example */,
 				F0E9CB5E180F685900D89DE2 /* Images.xcassets */,
 				F0E9CB4A180F685900D89DE2 /* Supporting Files */,
 			);
@@ -170,6 +192,7 @@
 		F0E9CB4A180F685900D89DE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F01AC89B18105A500093352B /* Images */,
 				F0E9CB4B180F685900D89DE2 /* MYBlurIntroductionView-Example-Info.plist */,
 				F0E9CB4C180F685900D89DE2 /* InfoPlist.strings */,
 				F0E9CB4F180F685900D89DE2 /* main.m */,
@@ -199,7 +222,6 @@
 		F0E9CB7B180F687100D89DE2 /* MYBlurIntroductionView */ = {
 			isa = PBXGroup;
 			children = (
-				F0E9CB87180F6C6A00D89DE2 /* Toronto, ON.jpg */,
 				F0E9CB84180F6A8600D89DE2 /* AMBlurView.h */,
 				F0E9CB85180F6A8600D89DE2 /* AMBlurView.m */,
 				F0E9CB7E180F689B00D89DE2 /* MYBlurIntroductionView.h */,
@@ -289,12 +311,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F01AC89718103A910093352B /* HeaderImage.png in Resources */,
+				F01AC89F18105F0B0093352B /* ForkImage.png in Resources */,
 				F01AC8931810314C0093352B /* MYCustomPanel.xib in Resources */,
 				F01AC88B181021E50093352B /* TestPanel3.xib in Resources */,
 				F0E9CB5A180F685900D89DE2 /* Main_iPad.storyboard in Resources */,
 				F0E9CB5F180F685900D89DE2 /* Images.xcassets in Resources */,
 				F0E9CB88180F6C6A00D89DE2 /* Toronto, ON.jpg in Resources */,
 				F0E9CB8A180F6CC800D89DE2 /* MYBlurIntroductionView.xib in Resources */,
+				F01AC89A18105A450093352B /* CheckMarkWhite.png in Resources */,
 				F0E9CB57180F685900D89DE2 /* Main_iPhone.storyboard in Resources */,
 				F0E9CB4E180F685900D89DE2 /* InfoPlist.strings in Resources */,
 				F01AC895181038FF0093352B /* TestHeader.xib in Resources */,

@@ -54,15 +54,20 @@ typedef enum {
 @property (weak) id <MYIntroductionDelegate> delegate;
 
 @property (nonatomic, retain) AMBlurView *BlurView;
+@property (weak, nonatomic) IBOutlet UIImageView *BackgroundImageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *MasterScrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *PageControl;
-@property (weak, nonatomic) IBOutlet UILabel *RightSkipButton;
-@property (weak, nonatomic) IBOutlet UILabel *LeftSkipButton;
+@property (weak, nonatomic) IBOutlet UIButton *RightSkipButton;
+@property (weak, nonatomic) IBOutlet UIButton *LeftSkipButton;
 @property (nonatomic, assign) NSInteger CurrentPanelIndex;
 
-//Init Methods
--(id)initWithFrame:(CGRect)frame panels:(NSArray *)panels;
+//Construction Methods
+-(void)buildIntroductionWithPanels:(NSArray *)panels;
 
 //Interaction Methods
+- (IBAction)didPressSkipButton;
 -(void)changeToPanelAtIndex:(NSInteger)index;
+
+//Enables or disables use of the introductionView. Use this if you want to hold someone on a panel until they have completed some task
+-(void)setEnabled:(BOOL)enabled;
 @end

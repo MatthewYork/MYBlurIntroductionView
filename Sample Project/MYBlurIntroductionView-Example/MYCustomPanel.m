@@ -7,6 +7,7 @@
 //
 
 #import "MYCustomPanel.h"
+#import "MYBlurIntroductionView.h"
 
 @implementation MYCustomPanel
 
@@ -33,10 +34,30 @@
 
 -(void)panelDidAppear{
     NSLog(@"Panel Did Appear");
+    
+    //You can use a MYIntroductionPanel subclass to create custom events and transitions for your introduction view
+    
+    [self.parentIntroductionView setEnabled:NO];
 }
 
 -(void)panelDidDisappear{
     NSLog(@"Panel Did Disappear");
+    
+    //Maybe here you want to reset the panel in case someone goes backward and the comes back to your panel
+    CongratulationsView.alpha = 0;
 }
 
+#pragma mark Outlets
+
+
+
+- (IBAction)didPressEnable:(id)sender {
+    //Show CongratulationsView
+    [UIView animateWithDuration:0.3 animations:^{
+        CongratulationsView.alpha = 1;
+    }];
+    
+    //Enable introducitonview
+    [self.parentIntroductionView setEnabled:YES];
+}
 @end

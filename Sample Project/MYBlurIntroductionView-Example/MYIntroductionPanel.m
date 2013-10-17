@@ -54,6 +54,7 @@
         
         self.PanelTitle = title;
         self.PanelDescription = description;
+        self.PanelImageView = [[UIImageView alloc] initWithImage:image];
         [self buildPanelWithFrame:frame];
     }
     return self;
@@ -64,10 +65,11 @@
     if (self) {
         // Initialization code
         [self initializeConstants];
+        
         self.PanelHeaderView = headerView;
         self.PanelTitle = title;
         self.PanelDescription = description;
-        self.PanelImage = image;
+        self.PanelImageView = [[UIImageView alloc] initWithImage:image];
         [self buildPanelWithFrame:frame];
     }
     return self;
@@ -152,7 +154,7 @@
     self.PanelSeparatorLine.backgroundColor = kSeparatorLineColor;
      [self addSubview:self.PanelSeparatorLine];
     
-    //Create title label
+    //Create description label
     self.PanelDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(kLeftRightMargins, descriptionYOffset, frame.size.width - 2*kLeftRightMargins, panelDescriptionHeight)];
     self.PanelDescriptionLabel.numberOfLines = 0;
     self.PanelDescriptionLabel.text = self.PanelDescription;
@@ -161,6 +163,15 @@
     self.PanelDescriptionLabel.alpha = 0;
     [self addSubview:self.PanelDescriptionLabel];
     
+    runningYOffset = descriptionYOffset + panelDescriptionHeight + kDescriptionImagePadding;
+    
+    //Add image, if there is room
+    if (self.PanelImageView.image) {
+        self.PanelImageView.frame = CGRectMake(kLeftRightMargins, runningYOffset, self.frame.size.width - 2*kLeftRightMargins, self.frame.size.height - runningYOffset - kBottomPadding);
+        self.PanelImageView.contentMode = UIViewContentModeCenter;
+        self.PanelImageView.clipsToBounds = YES;
+        [self addSubview:self.PanelImageView];
+    }
 }
 
 +(BOOL)runningiOS7{

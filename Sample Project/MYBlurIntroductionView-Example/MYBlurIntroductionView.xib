@@ -19,34 +19,43 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </scrollView>
-                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="esl-eS-R1S">
+                <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="esl-eS-R1S">
                     <rect key="frame" x="86" y="520" width="148" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="pageIndicatorTintColor" red="0.8366135817" green="0.8366135817" blue="0.8366135817" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </pageControl>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9K0-1W-hDw">
-                    <rect key="frame" x="242" y="527" width="58" height="21"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vER-kR-3rB">
+                    <rect key="frame" x="254" y="524" width="46" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skip" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="At6-yg-AIE">
-                    <rect key="frame" x="20" y="527" width="58" height="21"/>
+                    <state key="normal" title="Skip">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="didPressSkipButton" destination="9sb-1k-Btq" eventType="touchUpInside" id="f6B-Pt-mXJ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NHy-Px-UVt">
+                    <rect key="frame" x="20" y="524" width="46" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                    <state key="normal" title="Skip">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="didPressSkipButton" destination="9sb-1k-Btq" eventType="touchUpInside" id="AzB-Ue-9zr"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.35274266599999998" green="0.68555939499999996" blue="0.44502485190000002" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <connections>
-                <outlet property="LeftSkipButton" destination="At6-yg-AIE" id="7n1-E3-7Ls"/>
+                <outlet property="BackgroundImageView" destination="Vs2-Yk-pfi" id="Wg5-fp-vfa"/>
+                <outlet property="LeftSkipButton" destination="NHy-Px-UVt" id="fcu-v8-jG1"/>
                 <outlet property="MasterScrollView" destination="HNA-ao-Lot" id="pM9-nA-Yii"/>
                 <outlet property="PageControl" destination="esl-eS-R1S" id="mI8-4v-MX9"/>
-                <outlet property="RightSkipButton" destination="9K0-1W-hDw" id="iN3-o1-HBa"/>
+                <outlet property="RightSkipButton" destination="vER-kR-3rB" id="pxl-ZJ-cBA"/>
             </connections>
         </view>
     </objects>

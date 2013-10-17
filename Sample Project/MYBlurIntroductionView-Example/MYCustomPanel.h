@@ -8,6 +8,12 @@
 
 #import "MYIntroductionPanel.h"
 
-@interface MYCustomPanel : MYIntroductionPanel
+@interface MYCustomPanel : MYIntroductionPanel <UITextViewDelegate> {
+    
+    __weak IBOutlet UIView *CongratulationsView;
+}
+
+
+- (IBAction)didPressEnable:(id)sender;
 
 @end

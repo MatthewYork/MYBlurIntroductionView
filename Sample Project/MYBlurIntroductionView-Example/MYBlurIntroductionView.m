@@ -11,31 +11,30 @@
 @implementation MYBlurIntroductionView
 @synthesize delegate;
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
+-(id)initWithFrame:(CGRect)frame{
+    self = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil][0];
     if (self) {
-        // Initialization code
+        self.MasterScrollView.delegate = self;
+        self.frame = frame;
     }
     return self;
 }
 
--(id)initWithFrame:(CGRect)frame panels:(NSArray *)panels{
-    self = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil][0];
-    if (self) {
-        self.MasterScrollView.delegate = self;
-        Panels = panels;
-        
-        //Initialize Constants
-        [self initializeConstants];
-        
-        //Add the blur view to the background
-        [self addBlurViewwithFrame:frame];
-        
-        //Construct panels
-        [self addPanelsToScrollView];
+//Public method used to build panels
+-(void)buildIntroductionWithPanels:(NSArray *)panels{
+    Panels = panels;
+    for (MYIntroductionPanel *panel in Panels) {
+        panel.parentIntroductionView = self;
     }
-    return self;
+    
+    //Initialize Constants
+    [self initializeConstants];
+    
+    //Add the blur view to the background
+    [self addBlurViewwithFrame:self.frame];
+    
+    //Construct panels
+    [self addPanelsToScrollView];
 }
 
 -(void)initializeConstants{
@@ -216,9 +215,11 @@
     for (MYIntroductionPanel *panelView in Panels) {
         panelView.PanelTitleLabel.alpha = 0;
         panelView.PanelDescriptionLabel.alpha = 0;
+        panelView.PanelSeparatorLine.alpha = 0;
         if (panelView.PanelHeaderView) {
             panelView.PanelHeaderView.alpha = 0;
         }
+        panelView.PanelImageView.alpha = 0;
     }
     
     if ([Panels[index] isCustomPanel]) {
@@ -234,16 +235,19 @@
         }
         CGRect initialTitleFrame = [Panels[index] PanelTitleLabel].frame;
         CGRect initialDescriptionFrame = [Panels[index] PanelDescriptionLabel].frame;
+        CGRect initialImageFrame = [Panels[index] PanelImageView].frame;
         
         //Offset frames
         [[Panels[index] PanelTitleLabel] setFrame:CGRectMake(initialTitleFrame.origin.x + 10, initialTitleFrame.origin.y, initialTitleFrame.size.width, initialTitleFrame.size.height)];
         [[Panels[index] PanelDescriptionLabel] setFrame:CGRectMake(initialDescriptionFrame.origin.x + 10, initialDescriptionFrame.origin.y, initialDescriptionFrame.size.width, initialDescriptionFrame.size.height)];
-        [[Panels[index] PanelHeaderView] setFrame:CGRectMake(initialDescriptionFrame.origin.x, initialDescriptionFrame.origin.y - 10, initialDescriptionFrame.size.width, initialDescriptionFrame.size.height)];
+        [[Panels[index] PanelHeaderView] setFrame:CGRectMake(initialHeaderFrame.origin.x, initialHeaderFrame.origin.y - 10, initialHeaderFrame.size.width, initialHeaderFrame.size.height)];
+        [[Panels[index] PanelImageView] setFrame:CGRectMake(initialImageFrame.origin.x, initialImageFrame.origin.y + 10, initialImageFrame.size.width, initialImageFrame.size.height)];
         
         //Animate title and header
         [UIView animateWithDuration:0.3 animations:^{
             [[Panels[index] PanelTitleLabel] setAlpha:1];
             [[Panels[index] PanelTitleLabel] setFrame:initialTitleFrame];
+            [[Panels[index] PanelSeparatorLine] setAlpha:1];
             
             if ([Panels[index] PanelHeaderView]) {
                 [[Panels[index] PanelHeaderView] setAlpha:1];
@@ -254,6 +258,8 @@
             [UIView animateWithDuration:0.3 animations:^{
                 [[Panels[index] PanelDescriptionLabel] setAlpha:1];
                 [[Panels[index] PanelDescriptionLabel] setFrame:initialDescriptionFrame];
+                [[Panels[index] PanelImageView] setAlpha:1];
+                [[Panels[index] PanelImageView] setFrame:initialImageFrame];
             }];
         }];
     }
@@ -269,9 +275,48 @@
 
 #pragma mark - Interaction Methods
 
+- (IBAction)didPressSkipButton {
+    [self skipIntroduction];
+}
+
+-(void)skipIntroduction{
+    if ([(id)delegate respondsToSelector:@selector(introductionDidFinishWithType:)]) {
+        [delegate introductionDidFinishWithType:MYFinishTypeSkipButton];
+    }
+    
+    [self hideWithFadeOutDuration:0.3];
+}
+
+-(void)hideWithFadeOutDuration:(CGFloat)duration{
+    //Fade out
+    [UIView animateWithDuration:duration animations:^{
+        self.alpha = 0;
+    } completion:nil];
+}
+
 -(void)changeToPanelAtIndex:(NSInteger)index{
     
 }
 
-
+-(void)setEnabled:(BOOL)enabled{
+    [UIView animateWithDuration:0.3 animations:^{
+        if (enabled) {
+            if (LanguageDirection == MYLanguageDirectionLeftToRight) {
+                self.LeftSkipButton.alpha = !enabled;
+                self.RightSkipButton.alpha = enabled;
+            }
+            else if (LanguageDirection == MYLanguageDirectionRightToLeft){
+                self.LeftSkipButton.alpha = enabled;
+                self.RightSkipButton.alpha = !enabled;
+            }
+            
+            self.MasterScrollView.scrollEnabled = YES;
+        }
+        else {
+            self.LeftSkipButton.alpha = enabled;
+            self.RightSkipButton.alpha = enabled;
+            self.MasterScrollView.scrollEnabled = NO;
+        }
+    }];
+}
 @end
