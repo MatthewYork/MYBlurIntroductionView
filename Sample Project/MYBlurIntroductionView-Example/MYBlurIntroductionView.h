@@ -13,7 +13,9 @@
 #import "MYIntroductionPanel.h"
 
 static UIColor *kBlurTintColor = nil;
-
+static const CGFloat kPageControlWidth = 148;
+static const CGFloat kLeftRightSkipPadding = 10;
+static UIFont *kSkipButtonFont = nil;
 //Enum to define types of introduction finishes
 typedef enum {
     MYFinishTypeSwipeOut = 0,
@@ -55,11 +57,11 @@ typedef enum {
 
 @property (nonatomic, retain) AMBlurView *BlurView;
 @property (nonatomic, retain) UIView *BackgroundColorView;
-@property (weak, nonatomic) IBOutlet UIImageView *BackgroundImageView;
-@property (weak, nonatomic) IBOutlet UIScrollView *MasterScrollView;
-@property (weak, nonatomic) IBOutlet UIPageControl *PageControl;
-@property (weak, nonatomic) IBOutlet UIButton *RightSkipButton;
-@property (weak, nonatomic) IBOutlet UIButton *LeftSkipButton;
+@property (retain, nonatomic) UIImageView *BackgroundImageView;
+@property (retain, nonatomic) UIScrollView *MasterScrollView;
+@property (retain, nonatomic) UIPageControl *PageControl;
+@property (retain, nonatomic) UIButton *RightSkipButton;
+@property (retain, nonatomic) UIButton *LeftSkipButton;
 @property (nonatomic, assign) NSInteger CurrentPanelIndex;
 @property (nonatomic, assign) MYLanguageDirection LanguageDirection;
 

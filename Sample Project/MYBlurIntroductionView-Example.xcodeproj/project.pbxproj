@@ -33,7 +33,6 @@
 		F0E9CB83180F68A700D89DE2 /* MYIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E9CB82180F68A700D89DE2 /* MYIntroductionPanel.m */; };
 		F0E9CB86180F6A8600D89DE2 /* AMBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E9CB85180F6A8600D89DE2 /* AMBlurView.m */; };
 		F0E9CB88180F6C6A00D89DE2 /* Toronto, ON.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0E9CB87180F6C6A00D89DE2 /* Toronto, ON.jpg */; };
-		F0E9CB8A180F6CC800D89DE2 /* MYBlurIntroductionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0E9CB89180F6CC800D89DE2 /* MYBlurIntroductionView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,7 +81,6 @@
 		F0E9CB84180F6A8600D89DE2 /* AMBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBlurView.h; sourceTree = "<group>"; };
 		F0E9CB85180F6A8600D89DE2 /* AMBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBlurView.m; sourceTree = "<group>"; };
 		F0E9CB87180F6C6A00D89DE2 /* Toronto, ON.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Toronto, ON.jpg"; sourceTree = "<group>"; };
-		F0E9CB89180F6CC800D89DE2 /* MYBlurIntroductionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYBlurIntroductionView.xib; sourceTree = "<group>"; };
 		F0E9CB8B180F6E3300D89DE2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -226,7 +224,6 @@
 				F0E9CB85180F6A8600D89DE2 /* AMBlurView.m */,
 				F0E9CB7E180F689B00D89DE2 /* MYBlurIntroductionView.h */,
 				F0E9CB7F180F689B00D89DE2 /* MYBlurIntroductionView.m */,
-				F0E9CB89180F6CC800D89DE2 /* MYBlurIntroductionView.xib */,
 				F0E9CB81180F68A700D89DE2 /* MYIntroductionPanel.h */,
 				F0E9CB82180F68A700D89DE2 /* MYIntroductionPanel.m */,
 			);
@@ -320,7 +317,6 @@
 				F0E9CB5A180F685900D89DE2 /* Main_iPad.storyboard in Resources */,
 				F0E9CB5F180F685900D89DE2 /* Images.xcassets in Resources */,
 				F0E9CB88180F6C6A00D89DE2 /* Toronto, ON.jpg in Resources */,
-				F0E9CB8A180F6CC800D89DE2 /* MYBlurIntroductionView.xib in Resources */,
 				F01AC89A18105A450093352B /* CheckMarkWhite.png in Resources */,
 				F0E9CB57180F685900D89DE2 /* Main_iPhone.storyboard in Resources */,
 				F0E9CB4E180F685900D89DE2 /* InfoPlist.strings in Resources */,

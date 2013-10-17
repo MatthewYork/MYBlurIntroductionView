@@ -12,12 +12,66 @@
 @synthesize delegate;
 
 -(id)initWithFrame:(CGRect)frame{
-    self = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil][0];
-    if (self) {
+    //self = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil][0];
+    if (self = [super initWithFrame:frame]) {
         self.MasterScrollView.delegate = self;
         self.frame = frame;
+        [self initializeViewComponents];
     }
     return self;
+}
+
+-(void)initializeViewComponents{
+    //Background Image View
+    self.BackgroundImageView = [[UIImageView alloc] initWithFrame:self.frame];
+    self.BackgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.BackgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleHeight;
+    [self addSubview:self.BackgroundImageView];
+    
+    //Master Scroll View
+    self.MasterScrollView = [[UIScrollView alloc] initWithFrame:self.frame];
+    self.MasterScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleHeight;
+    self.MasterScrollView.pagingEnabled = YES;
+    self.MasterScrollView.delegate = self;
+    self.MasterScrollView.showsHorizontalScrollIndicator = NO;
+    self.MasterScrollView.showsVerticalScrollIndicator = NO;
+    [self addSubview:self.MasterScrollView];
+    
+    //Page Control
+    self.PageControl = [[UIPageControl alloc] initWithFrame:CGRectMake((self.frame.size.width - kPageControlWidth)/2, self.frame.size.height - 48, kPageControlWidth, 37)];
+    self.PageControl.currentPage = 0;
+    [self addSubview:self.PageControl];
+    
+    //Get skipString dimensions
+    NSString *skipString = NSLocalizedString(@"Skip", nil);
+    CGFloat skipStringWidth = 0;
+    kSkipButtonFont = [UIFont systemFontOfSize:16];
+    
+    if ([MYIntroductionPanel runningiOS7]) {
+        //Calculate Title Height
+        NSDictionary *titleAttributes = [NSDictionary dictionaryWithObject:kSkipButtonFont forKey: NSFontAttributeName];
+        skipStringWidth = [skipString boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:titleAttributes context:nil].size.width;
+        skipStringWidth = ceilf(skipStringWidth);
+    }
+    else {
+        skipStringWidth = [skipString sizeWithFont:kSkipButtonFont constrainedToSize:CGSizeMake(MAXFLOAT, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping].width;
+    }
+    
+    //Left Skip Button
+    self.LeftSkipButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.LeftSkipButton.frame = CGRectMake(10, self.frame.size.height - 48, 46, 37);
+    [self.LeftSkipButton setTitle:skipString forState:UIControlStateNormal];
+    [self.LeftSkipButton.titleLabel setFont:kSkipButtonFont];
+    [self.LeftSkipButton addTarget:self action:@selector(didPressSkipButton) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.LeftSkipButton];
+    
+    //Right Skip Button
+    self.RightSkipButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.RightSkipButton.frame = CGRectMake(self.frame.size.width - skipStringWidth - kLeftRightSkipPadding, self.frame.size.height - 48, skipStringWidth, 37);
+    [self.RightSkipButton.titleLabel setFont:kSkipButtonFont];
+    [self.RightSkipButton setTitle:skipString forState:UIControlStateNormal];
+    [self.RightSkipButton addTarget:self action:@selector(didPressSkipButton) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.RightSkipButton];
 }
 
 //Public method used to build panels
@@ -290,7 +344,7 @@
 
 #pragma mark - Interaction Methods
 
-- (IBAction)didPressSkipButton {
+- (void)didPressSkipButton {
     [self skipIntroduction];
 }
 

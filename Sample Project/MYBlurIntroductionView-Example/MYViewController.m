@@ -55,6 +55,7 @@
     //Create the introduction view and set its delegate
     MYBlurIntroductionView *introductionView = [[MYBlurIntroductionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     introductionView.delegate = self;
+    introductionView.BackgroundImageView.image = [UIImage imageNamed:@"Toronto, ON.jpg"];
     //introductionView.LanguageDirection = MYLanguageDirectionRightToLeft;
     
     //Build the introduction with desired panels
