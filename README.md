@@ -1,6 +1,11 @@
 MYBlurIntroductionView
 ======================
 
+![Panel1](https://raw.github.com/MatthewYork/MYBlurIntroductionView/master/Resources/Images/Small/iOS%20Simulator%20Screen%20shot%20Oct%2017,%202013%203.09.52%20PM.png)
+![Panel2](https://raw.github.com/MatthewYork/MYBlurIntroductionView/master/Resources/Images/Small/iOS%20Simulator%20Screen%20shot%20Oct%2017,%202013%203.09.56%20PM.png)
+![Panel3](https://raw.github.com/MatthewYork/MYBlurIntroductionView/master/Resources/Images/Small/iOS%20Simulator%20Screen%20shot%20Oct%2017,%202013%203.10.00%20PM.png)
+![Panel4](https://raw.github.com/MatthewYork/MYBlurIntroductionView/master/Resources/Images/Small/iOS%20Simulator%20Screen%20shot%20Oct%2017,%202013%204.42.36%20PM.png)
+
 ## A Controller Built With You In Mind
 
 It's time for one introduction/tutorial view to end them all! MYBlurIntroductionView is a powerful platform to build introductions for your iPhone apps. Built on the [MYIntroductionView](https://github.com/MatthewYork/iPhone-IntroductionTutorial) core, MYBlurIntroductionView takes the first time user experience to the next level by providing a host of new features for building introductions.
@@ -36,3 +41,7 @@ MYIntroductionPanel *panel1 = [[MYIntroductionPanel alloc] initWithFrame:CGRectM
 MYIntroductionPanel *panel2 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) title:@"Automated Stock Panels" description:@"Need a quick-and-dirty solution for your app introduction? MYBlurIntroductionView comes with customizable stock panels that make writing an introduction a walk in the park. Stock panels come with optional blurring (iOS 7) and background image. A full panel is just one method away!" image:[UIImage imageNamed:@"ForkImage.png"]];
 ```
 
+And here are the end results
+
+![Panel1](https://raw.github.com/MatthewYork/MYBlurIntroductionView/master/Resources/Images/iOS%20Simulator%20Screen%20shot%20Oct%2017,%202013%203.09.52%20PM.png)
+![Panel2](https://raw.github.com/MatthewYork/MYBlurIntroductionView/master/Resources/Images/iOS%20Simulator%20Screen%20shot%20Oct%2017,%202013%203.09.56%20PM.png)
