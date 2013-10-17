@@ -22,7 +22,10 @@ It's time for one introduction/tutorial view to end them all! MYBlurIntroduction
 
 ## What to include
 
-* MYIntroduction
+* <code>MYblurIntroductionView.{h,m}</code>
+* <code>MYIntroductionPanel.{h,m}</code>
+* <code>AMBlurView.{h,m}</code>
+* Uses the QuartzCore framework
 
 ## The Process
 
