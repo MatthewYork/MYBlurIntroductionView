@@ -117,7 +117,7 @@ The <code>buildIntroductionWithPanels</code> method is where all the magic happe
 [self.view addSubview:introductionView];
 ```
 
-To see all this in action, head over to the sample project! It creates an introduction view that uses all types of panels so you can understand all that MYBlurIntroductionView is capable of.
+To see all this in action, head over to the sample project! It creates an introduction view that uses all types of panels so you can understand all that MYBlurIntroductionView has to offer.
 
 ## Delegation
 
