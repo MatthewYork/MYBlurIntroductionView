@@ -126,3 +126,7 @@ MYBlurIntroductionView comes with two delegate methods for interacting with the 
   * This method will hit every time you change panels. Use this to perhaps change background images or blur color.
 * **introduction:didFinishWithType:**
   * This method triggers when the introduction view has finished. The type of finish is also provided. 
+
+## About the Author
+
+Matt York is an iOS, Android and C# developer with the [Center for Advanced Public Safety](http://caps.ua.edu/) ([Github Link](https://github.com/uacaps)). CAPS works to develop cutting edge mobile technology for law enforcement in the state of Alabama. Matt is also the founder of the Intercede social network, [available in the app store](https://itunes.apple.com/us/app/intercede/id693851621?mt=8).
