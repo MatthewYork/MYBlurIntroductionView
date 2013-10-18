@@ -5,7 +5,7 @@ MYBlurIntroductionView
 
 ## A Controller Built With You In Mind
 
-It's time for one introduction/tutorial view to end them all! MYBlurIntroductionView is a powerful platform to build introductions for your iPhone apps. Built on the [MYIntroductionView](https://github.com/MatthewYork/iPhone-IntroductionTutorial) core, MYBlurIntroductionView takes the first time user experience to the next level by providing a host of new features for building highly customized introductions.
+It's time for one introduction/tutorial view to end them all! MYBlurIntroductionView is a powerful platform to build introductions for your iPhone apps. Built on the [MYIntroductionView](https://github.com/MatthewYork/iPhone-IntroductionTutorial) core, MYBlurIntroductionView takes the first time user experience to the next level by providing a host of new features for building **highly customized introductions**.
 
 **Features Include**
 * Brand new stock panels built for iOS 7
