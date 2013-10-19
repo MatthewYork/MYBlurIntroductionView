@@ -82,6 +82,7 @@
         self = [[NSBundle mainBundle] loadNibNamed:nibName owner:nil options:nil][0];
         self.frame = frame;
         self.isCustomPanel = YES;
+        self.hasCustomAnimation = NO;
     }
     return self;
 }
@@ -172,6 +173,11 @@
         self.PanelImageView.contentMode = UIViewContentModeCenter;
         self.PanelImageView.clipsToBounds = YES;
         [self addSubview:self.PanelImageView];
+    }
+
+    // If this is a custom panel, set the has Custom animation boolean
+    if (self.isCustomPanel == YES) {
+        self.hasCustomAnimation = YES;
     }
 }
 

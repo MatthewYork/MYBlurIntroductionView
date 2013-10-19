@@ -34,6 +34,7 @@ static UIColor *kSeparatorLineColor = nil;
 @property (nonatomic, retain) UIView *PanelSeparatorLine;
 @property (nonatomic, retain) UIImageView *PanelImageView;
 @property (nonatomic, assign) BOOL isCustomPanel;
+@property (nonatomic, assign) BOOL hasCustomAnimation;
 
 //Init Methods
 -(id)initWithFrame:(CGRect)frame title:(NSString *)title description:(NSString *)description;
@@ -48,4 +49,6 @@ static UIColor *kSeparatorLineColor = nil;
 //Interaction Methods
 -(void)panelDidAppear;
 -(void)panelDidDisappear;
+
+-(void)buildPanelWithFrame:(CGRect)frame;
 @end
