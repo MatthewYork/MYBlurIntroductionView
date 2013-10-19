@@ -291,7 +291,7 @@
         panelView.PanelImageView.alpha = 0;
     }
     
-    if ([Panels[index] isCustomPanel]) {
+    if ([Panels[index] isCustomPanel] && ![Panels[index] hasCustomAnimation]) {
         return;
     }
     
