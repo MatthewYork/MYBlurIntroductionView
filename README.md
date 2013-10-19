@@ -71,7 +71,19 @@ Creating a custom panel is as easy as using the <code>initWithFrame:nibNamed:</c
 MYIntroductionPanel *panel3 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) nibNamed:@"TestPanel3"];
 ```
 
-This will attach the xib file to a MYIntroductionPanel so it may be used in the introduction view.
+This will attach the xib file to a MYIntroductionPanel so it may be used in the introduction view. If you would like to use the stock title/description/header/image and their animations, simply set the desired additional attributes after the instantiation of a panel, and run the <code>buildPanelWithFrame:</code> method. An example can be seen below.
+
+```objc
+//Instantiate panel
+MYIntroductionPanel *panel3 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) nibNamed:@"TestPanel3"];
+
+//Add custom attributes
+panel3.PanelTitle = @"Test Title";
+panel3.PanelDescription = @"This is a test panel description to test out the new animations on a custom nib";
+
+//Rebuild panel with new attributes
+[panel3 buildPanelWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+```
 
 **Tip** Make sure your autoresize properties are set to scale correctly (everything selected worked best for me). If you don't there may be some problems when you design for 4" screens, but deploy on 3.5".
 
