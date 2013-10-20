@@ -28,6 +28,13 @@ MYBlurIntroductionView is dependent on the following files and frameworks
 * <code>AMBlurView.{h,m}</code>
 * Uses the QuartzCore framework
 
+## CocoaPods
+
+<code>pod 'MYBlurIntroductionView', '~> 1.0.0'</code>
+
+For help setting up and maintaining dependencies using CocoaPods check out this link: http://cocoapods.org/
+
+
 ## The Process
 
 Creating an introduction view can basically be boiled down to these steps
