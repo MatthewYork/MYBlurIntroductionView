@@ -25,7 +25,7 @@ It's time for one introduction/tutorial view to end them all! MYBlurIntroduction
 ### Manual Installation
 
 MYBlurIntroductionView is dependent on the following files and frameworks
-* <code>MYblurIntroductionView.{h,m}</code>
+* <code>MYBlurIntroductionView.{h,m}</code>
 * <code>MYIntroductionPanel.{h,m}</code>
 * <code>AMBlurView.{h,m}</code>
 * Uses the QuartzCore framework
