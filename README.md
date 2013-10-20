@@ -20,15 +20,20 @@ It's time for one introduction/tutorial view to end them all! MYBlurIntroduction
 * Localized Skip Button
 * Right-to-Left Language Support
 
-## What to include
+## What to Include
+
+### Manual Installation
 
 MYBlurIntroductionView is dependent on the following files and frameworks
 * <code>MYblurIntroductionView.{h,m}</code>
 * <code>MYIntroductionPanel.{h,m}</code>
 * <code>AMBlurView.{h,m}</code>
 * Uses the QuartzCore framework
+* Requires ARC
 
-## CocoaPods
+### CocoaPods
+
+MYBlurIntroductionView is also available for installation through cocoapods by using the following command.
 
 <code>pod 'MYBlurIntroductionView', '~> 1.0.0'</code>
 
