@@ -12,7 +12,6 @@
 #import "AMBlurView.h"
 #import "MYIntroductionPanel.h"
 
-static UIColor *kBlurTintColor = nil;
 static const CGFloat kPageControlWidth = 148;
 static const CGFloat kLeftRightSkipPadding = 10;
 static UIFont *kSkipButtonFont = nil;
@@ -64,6 +63,7 @@ typedef enum {
 @property (retain, nonatomic) UIButton *LeftSkipButton;
 @property (nonatomic, assign) NSInteger CurrentPanelIndex;
 @property (nonatomic, assign) MYLanguageDirection LanguageDirection;
+@property (nonatomic, retain) UIColor *UserBackgroundColor;
 
 //Construction Methods
 -(void)buildIntroductionWithPanels:(NSArray *)panels;

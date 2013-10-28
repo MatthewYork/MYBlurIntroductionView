@@ -81,32 +81,25 @@
         panel.parentIntroductionView = self;
     }
     
-    //Initialize Constants
-    [self initializeConstants];
-    
     //Add the blur view to the background
-    [self addBlurViewwithFrame:self.frame];
+    [self addBlurViewWithFrame:self.frame];
     
     //Construct panels
     [self addPanelsToScrollView];
 }
 
--(void)initializeConstants{
-    kBlurTintColor = [UIColor colorWithRed:90.0f/255.0f green:175.0f/255.0f blue:113.0f/255.0f alpha:1];
-}
-
 //Adds the blur view just below the master scroll view for a blurred background look
--(void)addBlurViewwithFrame:(CGRect)frame{
+-(void)addBlurViewWithFrame:(CGRect)frame{
     if ([MYIntroductionPanel runningiOS7]) {
         self.BlurView = [AMBlurView new];
         self.BlurView.alpha = 1;
-        self.BlurView.blurTintColor = kBlurTintColor;
+        self.BlurView.blurTintColor = self.UserBackgroundColor;
         [self.BlurView setFrame:CGRectMake(0.0f,0.0f,frame.size.width,frame.size.height)];
         [self insertSubview:self.BlurView belowSubview:self.MasterScrollView];
     }
     else {
         self.BackgroundColorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,0.0f,frame.size.width,frame.size.height)];
-        self.BackgroundColorView.backgroundColor = kBlurTintColor;
+        self.BackgroundColorView.backgroundColor = self.UserBackgroundColor;
         [self insertSubview:self.BackgroundColorView belowSubview:self.MasterScrollView];
     }
 }
@@ -396,6 +389,10 @@
 #pragma mark - Customization Methods
 
 -(void)setBackgroundColor:(UIColor *)backgroundColor{
+    //Save the background color for building
+    self.UserBackgroundColor = backgroundColor;
+    
+    //Immediately apply the color
     if (self.BackgroundColorView) {
         self.BackgroundColorView.backgroundColor = backgroundColor;
     }
