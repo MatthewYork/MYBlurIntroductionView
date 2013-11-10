@@ -361,7 +361,34 @@
 }
 
 -(void)changeToPanelAtIndex:(NSInteger)index{
+    int currentIndex = self.CurrentPanelIndex;
+    if (self.LanguageDirection == MYLanguageDirectionRightToLeft)
+        currentIndex = (Panels.count-1)-self.CurrentPanelIndex;
     
+    if (Panels && index < Panels.count && currentIndex != index)
+    {
+        // For right-to-left, PageControl index is the inverse of the panel indicies.
+        
+        if ([Panels[currentIndex] respondsToSelector:@selector(panelDidDisappear)]) {
+            [Panels[currentIndex] panelDidDisappear];
+        }
+        
+        CGRect panelRect = [Panels[index] frame];
+        [self.MasterScrollView scrollRectToVisible:panelRect animated:YES];
+        self.CurrentPanelIndex = index;
+        [self animatePanelAtIndex:index];
+        
+        if (self.LanguageDirection == MYLanguageDirectionLeftToRight)
+            self.PageControl.currentPage = index;
+        else if (self.LanguageDirection == MYLanguageDirectionRightToLeft)
+            self.PageControl.currentPage = (Panels.count-1)-index;
+        
+        
+        if ([Panels[index] respondsToSelector:@selector(panelDidAppear)]) {
+            [Panels[index] panelDidAppear];
+        }
+    }
+    // Not sure what to do in the case when an out-of-index panel is specified... exception? nothing?
 }
 
 -(void)setEnabled:(BOOL)enabled{

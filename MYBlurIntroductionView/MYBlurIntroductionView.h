@@ -70,6 +70,8 @@ typedef enum {
 
 //Interaction Methods
 - (IBAction)didPressSkipButton;
+
+// index is relative to the array of panels passed in.
 -(void)changeToPanelAtIndex:(NSInteger)index;
 
 //Enables or disables use of the introductionView. Use this if you want to hold someone on a panel until they have completed some task
