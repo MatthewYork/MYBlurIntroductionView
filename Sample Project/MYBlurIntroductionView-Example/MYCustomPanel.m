@@ -60,4 +60,10 @@
     //Enable introducitonview
     [self.parentIntroductionView setEnabled:YES];
 }
+
+- (IBAction)didSelectPanelChange:(UIButton *)sender {
+    [self.parentIntroductionView setEnabled:YES];
+    [self.parentIntroductionView changeToPanelAtIndex:sender.tag];
+}
+
 @end

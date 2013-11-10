@@ -368,7 +368,6 @@
     if (Panels && index < Panels.count && currentIndex != index)
     {
         // For right-to-left, PageControl index is the inverse of the panel indicies.
-        
         if ([Panels[currentIndex] respondsToSelector:@selector(panelDidDisappear)]) {
             [Panels[currentIndex] panelDidDisappear];
         }
@@ -387,8 +386,15 @@
         if ([Panels[index] respondsToSelector:@selector(panelDidAppear)]) {
             [Panels[index] panelDidAppear];
         }
+        
+        //Callback to VC delegate, if appropriate
+        if([(id)delegate respondsToSelector:@selector(introduction:didChangeToPanel:withIndex:)]){
+            [(id)delegate introduction:self didChangeToPanel:Panels[index] withIndex:index];
+        }
     }
-    // Not sure what to do in the case when an out-of-index panel is specified... exception? nothing?
+    else {
+        NSLog(@"The index: %d is out of range for Panels array[0...%d]", index, Panels.count-1);
+    }
 }
 
 -(void)setEnabled:(BOOL)enabled{
