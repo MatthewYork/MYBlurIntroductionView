@@ -40,6 +40,7 @@
     //Page Control
     self.PageControl = [[UIPageControl alloc] initWithFrame:CGRectMake((self.frame.size.width - kPageControlWidth)/2, self.frame.size.height - 48, kPageControlWidth, 37)];
     self.PageControl.currentPage = 0;
+    self.PageControl.enabled = NO;
     [self addSubview:self.PageControl];
     
     //Get skipString dimensions
