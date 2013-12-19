@@ -210,9 +210,11 @@
             //Assign the last page to be the previous current page
             LastPanelIndex = self.PageControl.currentPage;
             
-            //Trigger the panel did appear method in the
-            if ([Panels[LastPanelIndex] respondsToSelector:@selector(panelDidDisappear)]) {
-                [Panels[LastPanelIndex] panelDidDisappear];
+            //Trigger the panel did appear method, but skip on a bounce
+            if (self.PageControl.currentPage != self.CurrentPanelIndex) {
+                if ([Panels[LastPanelIndex] respondsToSelector:@selector(panelDidDisappear)]) {
+                    [Panels[LastPanelIndex] panelDidDisappear];
+                }
             }
             
             //Update Page Control
