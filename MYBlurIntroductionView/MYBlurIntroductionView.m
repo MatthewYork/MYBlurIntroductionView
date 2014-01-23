@@ -30,7 +30,7 @@
     
     //Master Scroll View
     self.MasterScrollView = [[UIScrollView alloc] initWithFrame:self.frame];
-    self.MasterScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleHeight;
+    self.MasterScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.MasterScrollView.pagingEnabled = YES;
     self.MasterScrollView.delegate = self;
     self.MasterScrollView.showsHorizontalScrollIndicator = NO;
