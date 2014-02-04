@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-#import "AMBlurView.h"
+//#import "AMBlurView.h"
 #import "MYIntroductionPanel.h"
 
 static const CGFloat kPageControlWidth = 148;
@@ -54,7 +54,7 @@ typedef enum {
 //Delegate
 @property (weak) id <MYIntroductionDelegate> delegate;
 
-@property (nonatomic, retain) AMBlurView *BlurView;
+@property (nonatomic, retain) UIView *BlurView;
 @property (nonatomic, retain) UIView *BackgroundColorView;
 @property (retain, nonatomic) UIImageView *BackgroundImageView;
 @property (retain, nonatomic) UIScrollView *MasterScrollView;
