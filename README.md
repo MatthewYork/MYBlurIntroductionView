@@ -1,6 +1,9 @@
 MYBlurIntroductionView
 ======================
 
+#### NOTICE: As of Feb. 4, 2014, Apple is rejecting apps using blurs based on the UIToolbar class. MYBlurIntroductionView uses this class, and will need to be reconfigured so that your app will not be rejected. We are working on a solution and will be rewriting the below documentation to reflect the changes. 
+#### Cheers.
+
 ![Intro](https://raw.github.com/MatthewYork/MYBlurIntroductionView/master/Resources/Images/MYBlurIntroductionView.gif)
 
 ## A Controller Built With You In Mind
