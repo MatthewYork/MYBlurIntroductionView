@@ -14,7 +14,6 @@
 		F01AC89718103A910093352B /* HeaderImage.png in Resources */ = {isa = PBXBuildFile; fileRef = F01AC89618103A910093352B /* HeaderImage.png */; };
 		F01AC89A18105A450093352B /* CheckMarkWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = F01AC89918105A450093352B /* CheckMarkWhite.png */; };
 		F01AC89F18105F0B0093352B /* ForkImage.png in Resources */ = {isa = PBXBuildFile; fileRef = F01AC89E18105F0B0093352B /* ForkImage.png */; };
-		F01AC8A618109B070093352B /* AMBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = F01AC8A118109B070093352B /* AMBlurView.m */; };
 		F01AC8A718109B070093352B /* MYBlurIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F01AC8A318109B070093352B /* MYBlurIntroductionView.m */; };
 		F01AC8A818109B070093352B /* MYIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = F01AC8A518109B070093352B /* MYIntroductionPanel.m */; };
 		F0E9CB44180F685900D89DE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E9CB43180F685900D89DE2 /* Foundation.framework */; };
@@ -54,8 +53,6 @@
 		F01AC89618103A910093352B /* HeaderImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HeaderImage.png; sourceTree = "<group>"; };
 		F01AC89918105A450093352B /* CheckMarkWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckMarkWhite.png; sourceTree = "<group>"; };
 		F01AC89E18105F0B0093352B /* ForkImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ForkImage.png; sourceTree = "<group>"; };
-		F01AC8A018109B070093352B /* AMBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBlurView.h; path = ../../MYBlurIntroductionView/AMBlurView.h; sourceTree = "<group>"; };
-		F01AC8A118109B070093352B /* AMBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBlurView.m; path = ../../MYBlurIntroductionView/AMBlurView.m; sourceTree = "<group>"; };
 		F01AC8A218109B070093352B /* MYBlurIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MYBlurIntroductionView.h; path = ../../MYBlurIntroductionView/MYBlurIntroductionView.h; sourceTree = "<group>"; };
 		F01AC8A318109B070093352B /* MYBlurIntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MYBlurIntroductionView.m; path = ../../MYBlurIntroductionView/MYBlurIntroductionView.m; sourceTree = "<group>"; };
 		F01AC8A418109B070093352B /* MYIntroductionPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MYIntroductionPanel.h; path = ../../MYBlurIntroductionView/MYIntroductionPanel.h; sourceTree = "<group>"; };
@@ -220,8 +217,6 @@
 		F0E9CB7B180F687100D89DE2 /* MYBlurIntroductionView */ = {
 			isa = PBXGroup;
 			children = (
-				F01AC8A018109B070093352B /* AMBlurView.h */,
-				F01AC8A118109B070093352B /* AMBlurView.m */,
 				F01AC8A218109B070093352B /* MYBlurIntroductionView.h */,
 				F01AC8A318109B070093352B /* MYBlurIntroductionView.m */,
 				F01AC8A418109B070093352B /* MYIntroductionPanel.h */,
@@ -345,7 +340,6 @@
 				F0E9CB50180F685900D89DE2 /* main.m in Sources */,
 				F01AC8A818109B070093352B /* MYIntroductionPanel.m in Sources */,
 				F01AC8911810311B0093352B /* MYCustomPanel.m in Sources */,
-				F01AC8A618109B070093352B /* AMBlurView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

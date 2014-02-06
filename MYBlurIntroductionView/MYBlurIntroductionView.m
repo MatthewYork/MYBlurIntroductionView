@@ -82,27 +82,19 @@
         panel.parentIntroductionView = self;
     }
     
-    //Add the blur view to the background
-    [self addBlurViewWithFrame:self.frame];
+    //Add the overlay view to the background
+    [self addOverlayViewWithFrame:self.frame];
     
     //Construct panels
     [self addPanelsToScrollView];
 }
 
-//Adds the blur view just below the master scroll view for a blurred background look
--(void)addBlurViewWithFrame:(CGRect)frame{
-//    if ([MYIntroductionPanel runningiOS7]) {
-//        self.BlurView = [AMBlurView new];
-//        self.BlurView.alpha = 1;
-//        self.BlurView.blurTintColor = self.UserBackgroundColor;
-//        [self.BlurView setFrame:CGRectMake(0.0f,0.0f,frame.size.width,frame.size.height)];
-//        [self insertSubview:self.BlurView belowSubview:self.MasterScrollView];
-//    }
-//    else {
-        self.BackgroundColorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,0.0f,frame.size.width,frame.size.height)];
-        self.BackgroundColorView.backgroundColor = self.UserBackgroundColor;
-        [self insertSubview:self.BackgroundColorView belowSubview:self.MasterScrollView];
-//    }
+//Adds the overlay view just below the master scroll view for a blurred background look
+
+-(void)addOverlayViewWithFrame:(CGRect)frame{
+    self.BackgroundColorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,0.0f,frame.size.width,frame.size.height)];
+    self.BackgroundColorView.backgroundColor = self.UserBackgroundColor;
+    [self insertSubview:self.BackgroundColorView belowSubview:self.MasterScrollView];
 }
 
 -(void)addPanelsToScrollView{
@@ -170,15 +162,6 @@
     //Show the information at the first panel with animations
     [self animatePanelAtIndex:0];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 #pragma mark - UIScrollView Delegate
 
@@ -432,9 +415,6 @@
     if (self.BackgroundColorView) {
         self.BackgroundColorView.backgroundColor = backgroundColor;
     }
-//    else if (self.BlurView){
-//        self.BlurView.blurTintColor = backgroundColor;
-//    }
 }
 
 @end

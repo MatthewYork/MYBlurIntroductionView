@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-//#import "AMBlurView.h"
 #import "MYIntroductionPanel.h"
 
 static const CGFloat kPageControlWidth = 148;
