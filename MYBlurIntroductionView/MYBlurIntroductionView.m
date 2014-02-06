@@ -11,8 +11,14 @@
 @implementation MYBlurIntroductionView
 @synthesize delegate;
 
+/**
+ *  Initializes a new MYBlurIntroductionView.
+ *
+ *  @param frame CGRect - The desired frame size for the introduction view
+ *
+ *  @return MYBlurIntroductionView : UIView
+ */
 -(id)initWithFrame:(CGRect)frame{
-    //self = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil][0];
     if (self = [super initWithFrame:frame]) {
         self.MasterScrollView.delegate = self;
         self.frame = frame;
@@ -21,6 +27,9 @@
     return self;
 }
 
+/**
+ *  Initializes the high level view components for the introduction view.
+ */
 -(void)initializeViewComponents{
     //Background Image View
     self.BackgroundImageView = [[UIImageView alloc] initWithFrame:self.frame];
@@ -75,7 +84,6 @@
     [self addSubview:self.RightSkipButton];
 }
 
-//Public method used to build panels
 -(void)buildIntroductionWithPanels:(NSArray *)panels{
     Panels = panels;
     for (MYIntroductionPanel *panel in Panels) {
@@ -89,8 +97,12 @@
     [self addPanelsToScrollView];
 }
 
-//Adds the overlay view just below the master scroll view for a blurred background look
-
+/**
+ *  Adds the overlay view just below the master scroll view for an overlay background look.
+ *
+ *  @param frame @b CGRect - Specifies the desired size of the overlayed view.
+ *
+ */
 -(void)addOverlayViewWithFrame:(CGRect)frame{
     self.BackgroundColorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,0.0f,frame.size.width,frame.size.height)];
     self.BackgroundColorView.backgroundColor = self.UserBackgroundColor;

@@ -64,18 +64,36 @@ typedef enum {
 @property (nonatomic, assign) MYLanguageDirection LanguageDirection;
 @property (nonatomic, retain) UIColor *UserBackgroundColor;
 
-//Construction Methods
+/**
+ *  Public method used to build panels
+ *
+ *  @param panels @b Array of MYIntroductionPanel objects
+ */
 -(void)buildIntroductionWithPanels:(NSArray *)panels;
 
-//Interaction Methods
+/**
+ *  Handles the event that the skip button was tapped.
+ */
 - (IBAction)didPressSkipButton;
 
-// index is relative to the array of panels passed in.
+/**
+ *  Changes the panel to a desired index. The index is relative to the array of panels passed in to the @em buildIntroductionWithPanels
+ *
+ *  @param index @b NSInteger The desired panel number to be changed to
+ */
 -(void)changeToPanelAtIndex:(NSInteger)index;
 
-//Enables or disables use of the introductionView. Use this if you want to hold someone on a panel until they have completed some task
+/**
+ *  Enables or disables use of the introductionView. Use this if you want to hold someone on a panel until they have completed some task
+ *
+ *  @param enabled @b BOOL The desired enabled status of the introduction view
+ */
 -(void)setEnabled:(BOOL)enabled;
 
-//Customization Methods
+/**
+ *  Changes the background color of the introduction view. This background color sits a layer above the background image layer.
+ *
+ *  @param backgroundColor  @b UIColor The desired background color
+ */
 -(void)setBackgroundColor:(UIColor *)backgroundColor;
 @end
