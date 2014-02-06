@@ -91,18 +91,18 @@
 
 //Adds the blur view just below the master scroll view for a blurred background look
 -(void)addBlurViewWithFrame:(CGRect)frame{
-    if ([MYIntroductionPanel runningiOS7]) {
-        self.BlurView = [AMBlurView new];
-        self.BlurView.alpha = 1;
-        self.BlurView.blurTintColor = self.UserBackgroundColor;
-        [self.BlurView setFrame:CGRectMake(0.0f,0.0f,frame.size.width,frame.size.height)];
-        [self insertSubview:self.BlurView belowSubview:self.MasterScrollView];
-    }
-    else {
+//    if ([MYIntroductionPanel runningiOS7]) {
+//        self.BlurView = [AMBlurView new];
+//        self.BlurView.alpha = 1;
+//        self.BlurView.blurTintColor = self.UserBackgroundColor;
+//        [self.BlurView setFrame:CGRectMake(0.0f,0.0f,frame.size.width,frame.size.height)];
+//        [self insertSubview:self.BlurView belowSubview:self.MasterScrollView];
+//    }
+//    else {
         self.BackgroundColorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,0.0f,frame.size.width,frame.size.height)];
         self.BackgroundColorView.backgroundColor = self.UserBackgroundColor;
         [self insertSubview:self.BackgroundColorView belowSubview:self.MasterScrollView];
-    }
+//    }
 }
 
 -(void)addPanelsToScrollView{
@@ -432,9 +432,9 @@
     if (self.BackgroundColorView) {
         self.BackgroundColorView.backgroundColor = backgroundColor;
     }
-    else if (self.BlurView){
-        self.BlurView.blurTintColor = backgroundColor;
-    }
+//    else if (self.BlurView){
+//        self.BlurView.blurTintColor = backgroundColor;
+//    }
 }
 
 @end
