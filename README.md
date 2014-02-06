@@ -34,7 +34,7 @@ MYBlurIntroductionView is dependent on the following files and frameworks
 
 MYBlurIntroductionView is also available for installation through cocoapods by using the following command.
 
-<code>pod 'MYBlurIntroductionView', '~> v1.0.3'</code>
+<code>pod 'MYBlurIntroductionView', '~> 1.0.2'</code>
 
 For help setting up and maintaining dependencies using CocoaPods check out this link: http://cocoapods.org/
 
