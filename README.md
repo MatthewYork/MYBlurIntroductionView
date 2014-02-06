@@ -1,9 +1,6 @@
 MYBlurIntroductionView
 ======================
 
-#### NOTICE: As of Feb. 4, 2014, Apple is rejecting apps using blurs based on the UIToolbar class. MYBlurIntroductionView uses this class, and will need to be reconfigured so that your app will not be rejected. We are working on a solution and will be rewriting the below documentation to reflect the changes. 
-#### Cheers.
-
 ![Intro](https://raw.github.com/MatthewYork/MYBlurIntroductionView/master/Resources/Images/MYBlurIntroductionView.gif)
 
 ## A Controller Built With You In Mind
@@ -12,7 +9,7 @@ It's time for one introduction/tutorial view to end them all! MYBlurIntroduction
 
 **Features Include**
 * Brand new stock panels built for iOS 7
-* Optional blurred backgrounds for iOS 7 (Much love to [ArcticMinds](https://github.com/ArcticMinds/iOS-blur))
+* Optional overlay on background images
 * Add **custom panels** straight from .xib files
 * Subclass MYIntroductionPanel (the stock panel) for **custom panels** with access to new methods like
   * panelDidAppear 
@@ -30,7 +27,6 @@ It's time for one introduction/tutorial view to end them all! MYBlurIntroduction
 MYBlurIntroductionView is dependent on the following files and frameworks
 * <code>MYBlurIntroductionView.{h,m}</code>
 * <code>MYIntroductionPanel.{h,m}</code>
-* <code>AMBlurView.{h,m}</code>
 * Uses the QuartzCore framework
 * Requires ARC
 
@@ -38,7 +34,7 @@ MYBlurIntroductionView is dependent on the following files and frameworks
 
 MYBlurIntroductionView is also available for installation through cocoapods by using the following command.
 
-<code>pod 'MYBlurIntroductionView', '~> 1.0.1'</code>
+<code>pod 'MYBlurIntroductionView', '~> v1.0.3'</code>
 
 For help setting up and maintaining dependencies using CocoaPods check out this link: http://cocoapods.org/
 
@@ -56,7 +52,7 @@ Creating an introduction view can basically be boiled down to these steps
 
 ### Stock Panels
 
-One goal for MYBlurIntroductionView is to make the creation of stock (or "non-custom") panels just as easy as with MYIntroductionView. That's why the basic interface hasn't changed one bit. All content is optional and rearranges nicely for you. 
+One goal for MYBlurIntroductionView is to make the creation of stock (or "non-custom") panels just as easy as with MYIntroductionView. That's why the basic interface hasn't changed one bit. All content is optional and rearranges nicely for you. bl
 
 The main panel class is <code>MYIntroductionPanel.{h,m}</code>. It has many different custom init methods for rapid creation of stock panels. Here are a few samples, the first with a header, and the second without.
 
@@ -67,7 +63,7 @@ UIView *headerView = [[NSBundle mainBundle] loadNibNamed:@"TestHeader" owner:nil
 MYIntroductionPanel *panel1 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) title:@"Welcome to MYBlurIntroductionView" description:@"MYBlurIntroductionView is a powerful platform for building app introductions and tutorials. Built on the MYIntroductionView core, this revamped version has been reengineered for beauty and greater developer control." image:[UIImage imageNamed:@"HeaderImage.png"] header:headerView];
     
 //Create stock panel with image
-MYIntroductionPanel *panel2 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) title:@"Automated Stock Panels" description:@"Need a quick-and-dirty solution for your app introduction? MYBlurIntroductionView comes with customizable stock panels that make writing an introduction a walk in the park. Stock panels come with optional blurring (iOS 7) and background image. A full panel is just one method away!" image:[UIImage imageNamed:@"ForkImage.png"]];
+MYIntroductionPanel *panel2 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) title:@"Automated Stock Panels" description:@"Need a quick-and-dirty solution for your app introduction? MYBlurIntroductionView comes with customizable stock panels that make writing an introduction a walk in the park. Stock panels come with optional overlay on background images. A full panel is just one method away!" image:[UIImage imageNamed:@"ForkImage.png"]];
 ```
 
 And here are the end results
