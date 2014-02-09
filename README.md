@@ -1,6 +1,8 @@
 MYBlurIntroductionView
 ======================
 
+#####NOTICE: As of February 4th, Apple has begun to ban new app submissions using the common blurring method (UIToolbar hack) found in MYBlurIntroductionView. We will work toward a new solution, but unfortunately this library has removed the blurring functionality until a solution is found. Cheers.
+
 ![Intro](https://raw.github.com/MatthewYork/MYBlurIntroductionView/master/Resources/Images/MYBlurIntroductionView.gif)
 
 ## A Controller Built With You In Mind
