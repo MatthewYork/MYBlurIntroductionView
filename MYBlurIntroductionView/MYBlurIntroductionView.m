@@ -349,7 +349,7 @@
 -(void)skipIntroduction{
     if ([(id)delegate respondsToSelector:@selector(introduction:didFinishWithType:)]) {
         [delegate introduction:self didFinishWithType:MYFinishTypeSkipButton];
-        [self removeFromSuperview];
+        
     }
     
     [self hideWithFadeOutDuration:0.3];
@@ -359,7 +359,12 @@
     //Fade out
     [UIView animateWithDuration:duration animations:^{
         self.alpha = 0;
-    } completion:nil];
+    } completion:^(BOOL finished){
+        if (finished) {
+            [self removeFromSuperview];
+        }
+        
+    }];
 }
 
 -(void)changeToPanelAtIndex:(NSInteger)index{
