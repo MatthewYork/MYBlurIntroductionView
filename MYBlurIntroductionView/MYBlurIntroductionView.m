@@ -193,6 +193,7 @@
             }
             if ([(id)delegate respondsToSelector:@selector(introduction:didFinishWithType:)]) {
                 [delegate introduction:self didFinishWithType:MYFinishTypeSwipeOut];
+                [self removeFromSuperview];
             }
         }
         else {
@@ -232,6 +233,7 @@
         if (self.CurrentPanelIndex == -1) {
             if ([(id)delegate respondsToSelector:@selector(introduction:didFinishWithType:)]) {
                 [delegate introduction:self didFinishWithType:MYFinishTypeSwipeOut];
+                [self removeFromSuperview];
             }
         }
         else {
@@ -258,6 +260,7 @@
 
 //This will handle our changing opacity at the end of the introduction
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    self.CurrentPanelIndex = scrollView.contentOffset.x/self.MasterScrollView.frame.size.width;
     if (self.LanguageDirection == MYLanguageDirectionLeftToRight) {
         if (self.CurrentPanelIndex == (Panels.count - 1)) {
             self.alpha = ((self.MasterScrollView.frame.size.width*(float)Panels.count)-self.MasterScrollView.contentOffset.x)/self.MasterScrollView.frame.size.width;
@@ -346,6 +349,7 @@
 -(void)skipIntroduction{
     if ([(id)delegate respondsToSelector:@selector(introduction:didFinishWithType:)]) {
         [delegate introduction:self didFinishWithType:MYFinishTypeSkipButton];
+        [self removeFromSuperview];
     }
     
     [self hideWithFadeOutDuration:0.3];
