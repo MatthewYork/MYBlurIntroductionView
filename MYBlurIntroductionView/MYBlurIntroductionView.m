@@ -193,8 +193,8 @@
             }
             if ([(id)delegate respondsToSelector:@selector(introduction:didFinishWithType:)]) {
                 [delegate introduction:self didFinishWithType:MYFinishTypeSwipeOut];
-                [self removeFromSuperview];
             }
+            [self removeFromSuperview];
         }
         else {
             //Assign the last page to be the previous current page
@@ -233,8 +233,8 @@
         if (self.CurrentPanelIndex == -1) {
             if ([(id)delegate respondsToSelector:@selector(introduction:didFinishWithType:)]) {
                 [delegate introduction:self didFinishWithType:MYFinishTypeSwipeOut];
-                [self removeFromSuperview];
             }
+            [self removeFromSuperview];
         }
         else {
             //Update Page Control
@@ -349,9 +349,7 @@
 -(void)skipIntroduction{
     if ([(id)delegate respondsToSelector:@selector(introduction:didFinishWithType:)]) {
         [delegate introduction:self didFinishWithType:MYFinishTypeSkipButton];
-        
     }
-    
     [self hideWithFadeOutDuration:0.3];
 }
 
