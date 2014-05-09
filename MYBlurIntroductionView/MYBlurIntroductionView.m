@@ -58,7 +58,6 @@
     kSkipButtonFont = [UIFont systemFontOfSize:16];
     
     if ([MYIntroductionPanel runningiOS7]) {
-        //Calculate Title Height
         NSDictionary *titleAttributes = [NSDictionary dictionaryWithObject:kSkipButtonFont forKey: NSFontAttributeName];
         skipStringWidth = [skipString boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:titleAttributes context:nil].size.width;
         skipStringWidth = ceilf(skipStringWidth);
@@ -86,10 +85,7 @@
 
 -(void)buildIntroductionWithPanels:(NSArray *)panels{
     Panels = panels;
-    for (MYIntroductionPanel *panel in Panels) {
-        panel.parentIntroductionView = self;
-    }
-    
+
     //Add the overlay view to the background
     [self addOverlayViewWithFrame:self.frame];
     
@@ -280,56 +276,11 @@
     
     //Hide all labels
     for (MYIntroductionPanel *panelView in Panels) {
-        panelView.PanelTitleLabel.alpha = 0;
-        panelView.PanelDescriptionLabel.alpha = 0;
-        panelView.PanelSeparatorLine.alpha = 0;
-        if (panelView.PanelHeaderView) {
-            panelView.PanelHeaderView.alpha = 0;
-        }
-        panelView.PanelImageView.alpha = 0;
-    }
-    
-    if ([Panels[index] isCustomPanel] && ![Panels[index] hasCustomAnimation]) {
-        return;
+        [panelView hideContent];
     }
     
     //Animate
-    if (Panels.count > index) {
-        //Get initial frames
-        CGRect initialHeaderFrame = CGRectZero;
-        if ([Panels[index] PanelHeaderView]) {
-            initialHeaderFrame = [Panels[index] PanelHeaderView].frame;
-        }
-        CGRect initialTitleFrame = [Panels[index] PanelTitleLabel].frame;
-        CGRect initialDescriptionFrame = [Panels[index] PanelDescriptionLabel].frame;
-        CGRect initialImageFrame = [Panels[index] PanelImageView].frame;
-        
-        //Offset frames
-        [[Panels[index] PanelTitleLabel] setFrame:CGRectMake(initialTitleFrame.origin.x + 10, initialTitleFrame.origin.y, initialTitleFrame.size.width, initialTitleFrame.size.height)];
-        [[Panels[index] PanelDescriptionLabel] setFrame:CGRectMake(initialDescriptionFrame.origin.x + 10, initialDescriptionFrame.origin.y, initialDescriptionFrame.size.width, initialDescriptionFrame.size.height)];
-        [[Panels[index] PanelHeaderView] setFrame:CGRectMake(initialHeaderFrame.origin.x, initialHeaderFrame.origin.y - 10, initialHeaderFrame.size.width, initialHeaderFrame.size.height)];
-        [[Panels[index] PanelImageView] setFrame:CGRectMake(initialImageFrame.origin.x, initialImageFrame.origin.y + 10, initialImageFrame.size.width, initialImageFrame.size.height)];
-        
-        //Animate title and header
-        [UIView animateWithDuration:0.3 animations:^{
-            [[Panels[index] PanelTitleLabel] setAlpha:1];
-            [[Panels[index] PanelTitleLabel] setFrame:initialTitleFrame];
-            [[Panels[index] PanelSeparatorLine] setAlpha:1];
-            
-            if ([Panels[index] PanelHeaderView]) {
-                [[Panels[index] PanelHeaderView] setAlpha:1];
-                [[Panels[index] PanelHeaderView] setFrame:initialHeaderFrame];
-            }
-        } completion:^(BOOL finished) {
-            //Animate description
-            [UIView animateWithDuration:0.3 animations:^{
-                [[Panels[index] PanelDescriptionLabel] setAlpha:1];
-                [[Panels[index] PanelDescriptionLabel] setFrame:initialDescriptionFrame];
-                [[Panels[index] PanelImageView] setAlpha:1];
-                [[Panels[index] PanelImageView] setFrame:initialImageFrame];
-            }];
-        }];
-    }
+    [Panels[index] showContent];
 }
 
 -(void)appendCloseViewAtXIndex:(CGFloat*)xIndex{
@@ -347,10 +298,7 @@
 }
 
 -(void)skipIntroduction{
-    if ([(id)delegate respondsToSelector:@selector(introduction:didFinishWithType:)]) {
-        [delegate introduction:self didFinishWithType:MYFinishTypeSkipButton];
-    }
-    [self hideWithFadeOutDuration:0.3];
+    [self hideWithFadeOutDuration:0.5];
 }
 
 -(void)hideWithFadeOutDuration:(CGFloat)duration{
@@ -359,6 +307,10 @@
         self.alpha = 0;
     } completion:^(BOOL finished){
         if (finished) {
+            if ([(id)delegate respondsToSelector:@selector(introduction:didFinishWithType:)]) {
+                [delegate introduction:self didFinishWithType:MYFinishTypeSkipButton];
+            }
+            
             [self removeFromSuperview];
         }
         
@@ -366,7 +318,7 @@
 }
 
 -(void)changeToPanelAtIndex:(NSInteger)index{
-    int currentIndex = self.CurrentPanelIndex;
+    NSInteger currentIndex = self.CurrentPanelIndex;
     if (self.LanguageDirection == MYLanguageDirectionRightToLeft)
         currentIndex = (Panels.count-1)-self.CurrentPanelIndex;
     
@@ -398,7 +350,7 @@
         }
     }
     else {
-        NSLog(@"The index: %d is out of range for Panels array[0...%d]", index, Panels.count-1);
+        NSLog(@"The index: %ld is out of range for Panels array[0...%lu]", (long)index, (long)(Panels.count-1));
     }
 }
 
