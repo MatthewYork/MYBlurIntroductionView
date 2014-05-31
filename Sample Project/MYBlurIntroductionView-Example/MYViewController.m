@@ -69,7 +69,7 @@
 #pragma mark - MYIntroduction Delegate 
 
 -(void)introduction:(MYBlurIntroductionView *)introductionView didChangeToPanel:(MYIntroductionPanel *)panel withIndex:(NSInteger)panelIndex{
-    NSLog(@"Introduction did change to panel %d", panelIndex);
+    NSLog(@"Introduction did change to panel %ld", (long)panelIndex);
     
     //You can edit introduction view properties right from the delegate method!
     //If it is the first panel, change the color to green!

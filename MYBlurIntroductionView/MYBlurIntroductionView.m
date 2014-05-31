@@ -85,6 +85,9 @@
 
 -(void)buildIntroductionWithPanels:(NSArray *)panels{
     Panels = panels;
+    for (MYIntroductionPanel *panel in Panels) {
+        panel.parentIntroductionView = self;
+    }
 
     //Add the overlay view to the background
     [self addOverlayViewWithFrame:self.frame];
@@ -298,7 +301,7 @@
 }
 
 -(void)skipIntroduction{
-    [self hideWithFadeOutDuration:0.5];
+    [self hideWithFadeOutDuration:0.3];
 }
 
 -(void)hideWithFadeOutDuration:(CGFloat)duration{
