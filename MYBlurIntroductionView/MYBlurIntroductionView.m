@@ -149,6 +149,11 @@
     
     //Show the information at the first panel with animations
     [self animatePanelAtIndex:0];
+    
+    //Call first panel view did appear
+    if ([Panels[0] respondsToSelector:@selector(panelDidAppear)]) {
+        [Panels[0] panelDidAppear];
+    }
 }
 
 -(void)buildScrollViewRightToLeft{
