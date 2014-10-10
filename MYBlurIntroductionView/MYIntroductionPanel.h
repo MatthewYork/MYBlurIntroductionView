@@ -24,7 +24,7 @@ static UIColor *kSeparatorLineColor = nil;
 
 @interface MYIntroductionPanel : UIView
 
-@property (nonatomic, retain) MYBlurIntroductionView *parentIntroductionView;
+@property (weak) MYBlurIntroductionView *parentIntroductionView;
 
 //Init Methods
 -(id)initWithFrame:(CGRect)frame title:(NSString *)title description:(NSString *)description;
